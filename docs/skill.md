@@ -121,7 +121,7 @@ English/
 #### 1.1 Setup Project
 - ✅ `npx create-expo-app mobile --template expo-template-blank-typescript`
 - ✅ Cài dependencies: React Navigation, Zustand, Reanimated 3, AsyncStorage
-- 🔲 Cấu hình ESLint + Prettier
+- ✅ Cấu hình ESLint + Prettier
 - ✅ Setup folder structure theo cây thư mục ở trên
 
 #### 1.2 Design System

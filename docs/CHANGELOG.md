@@ -4,10 +4,14 @@
 
 ## [Unreleased]
 ### Kế hoạch tiếp theo (Phase 1)
-- Cấu hình ESLint + Prettier cho Mobile.
 - Dựng các UI Component cơ bản (Button, Card, Badge, Theme Provider).
 - Setup MongoDB Atlas Connection ở Backend.
 - Bắt tay vào làm Auth Screens & Auth Routes.
+
+## [2026-05-21] (Lần 3) - Cấu hình Code Quality
+- ✅ **Mobile**: Cài đặt ESLint, Prettier.
+- ✅ **Mobile**: Cấu hình file `.eslintrc.js`, `.prettierrc`, `.eslintignore`.
+- ✅ **Mobile**: Cập nhật lệnh `lint` và `format` trong `package.json`.
 
 ## [2026-05-21] (Lần 2) - Bắt đầu Phase 1 Setup
 - ✅ **Mobile**: Khởi tạo project React Native Expo với `blank-typescript`.

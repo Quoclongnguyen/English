@@ -20,5 +20,5 @@ export const Typography = {
     md: 24,
     lg: 28,
     xl: 32,
-  }
+  },
 };

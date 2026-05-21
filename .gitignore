@@ -4,4 +4,3 @@ dist/
 .expo/
 *.log
 .DS_Store
-docs
