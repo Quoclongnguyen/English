@@ -127,10 +127,10 @@ English/
 #### 1.2 Design System
 - ✅ File `constants/colors.ts` — toàn bộ bảng màu hex
 - ✅ File `constants/typography.ts` — font Nunito + Space Mono
-- 🔲 Component `Button` (primary / secondary / ghost)
-- 🔲 Component `Card` (bo tròn, shadow)
-- 🔲 Component `Badge` (level badge, status label)
-- 🔲 Dark / Light theme provider
+- ✅ Component `Button` (primary / secondary / ghost)
+- ✅ Component `Card` (bo tròn, shadow)
+- ✅ Component `Badge` (level badge, status label)
+- ✅ Dark / Light theme provider
 
 #### 1.3 Backend Setup
 - ✅ `npm init` + cài Express, Mongoose, TypeScript, dotenv

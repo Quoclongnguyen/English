@@ -4,9 +4,15 @@
 
 ## [Unreleased]
 ### Kế hoạch tiếp theo (Phase 1)
-- Dựng các UI Component cơ bản (Button, Card, Badge, Theme Provider).
 - Setup MongoDB Atlas Connection ở Backend.
 - Bắt tay vào làm Auth Screens & Auth Routes.
+
+## [2026-05-21] (Lần 4) - Xây dựng Design System
+- ✅ **Mobile**: Cài đặt font `Nunito` và `Space Mono`.
+- ✅ **Mobile**: Tạo `ThemeStore` (Zustand) hỗ trợ Dark/Light mode chuẩn xác theo cấu hình Figma.
+- ✅ **Mobile**: Dựng Component `Button` hỗ trợ nhiều variant (primary, outline) và màu (green, purple, etc.).
+- ✅ **Mobile**: Dựng Component `Card` và `Badge` tái sử dụng, tương thích giao diện dark/light.
+- ✅ **Mobile**: Cập nhật `App.tsx` để render thử các component này.
 
 ## [2026-05-21] (Lần 3) - Cấu hình Code Quality
 - ✅ **Mobile**: Cài đặt ESLint, Prettier.
