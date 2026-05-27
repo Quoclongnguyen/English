@@ -134,20 +134,24 @@ English/
 
 #### 1.3 Backend Setup
 - ✅ `npm init` + cài Express, Mongoose, TypeScript, dotenv
-- 🔲 Kết nối MongoDB Atlas
-- 🔲 Model `User` + index
-- 🔲 `POST /api/auth/register` — hash password bcrypt
-- 🔲 `POST /api/auth/login` — trả JWT + Refresh Token
-- 🔲 `POST /api/auth/refresh` — cấp lại access token
-- 🔲 `GET /api/auth/me` — middleware xác thực
-- 🔲 Google OAuth (`passport-google-oauth20`)
+- ✅ Kết nối MongoDB Atlas (code ready, cần điền `MONGODB_URI` thật vào `.env`)
+- ✅ Model `User` + index
+- ✅ `POST /api/auth/register` — hash password bcrypt
+- ✅ `POST /api/auth/login` — trả JWT + Refresh Token
+- ✅ `POST /api/auth/refresh` — cấp lại access token
+- ✅ `GET /api/auth/me` — middleware xác thực
+- 🔲 Google OAuth (`passport-google-oauth20`) — tạm hoãn
 
 #### 1.4 Auth Screens (Mobile)
-- 🔲 `SplashScreen` — logo LEXIS + animation fade in
-- 🔲 `LoginScreen` — nút Google / Apple / Email
-- 🔲 `RegisterScreen` — form email + password
-- 🔲 Zustand `authStore` — lưu token, user info
-- 🔲 Axios interceptor — tự refresh token khi hết hạn
+- 🔄 `SplashScreen` — logo LEXIS + animation fade in
+- 🔄 `LoginScreen` — nút Google / Apple / Email
+- 🔄 `RegisterScreen` — form email + password
+- ✅ Zustand `authStore` — lưu token, user info
+- ✅ Axios interceptor — tự refresh token khi hết hạn
+- ✅ `src/services/authService.ts` — wrap API calls
+- ✅ `src/navigation/AuthNavigator.tsx` — Stack navigator
+- 🔄 `src/navigation/AppNavigator.tsx` — Bottom Tab navigator
+- 🔄 `src/navigation/index.tsx` — Root Navigator (Auth/App switch)
 
 #### 1.5 Onboarding
 - 🔲 `OnboardingGoalScreen` — chọn mục tiêu (4 lựa chọn)

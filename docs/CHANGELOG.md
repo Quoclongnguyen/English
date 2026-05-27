@@ -3,9 +3,32 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
-### Kế hoạch tiếp theo (Phase 1)
-- Setup MongoDB Atlas Connection ở Backend.
-- Bắt tay vào làm Auth Screens & Auth Routes.
+### Kế hoạch tiếp theo
+- Hoàn thiện Auth Screens: `SplashScreen`, `LoginScreen`, `RegisterScreen`.
+- Cập nhật `App.tsx` dùng Root Navigator.
+- Test end-to-end: Register → Login → navigate vào App.
+- Điền `MONGODB_URI` thật vào `.env` và kết nối MongoDB Atlas.
+
+## [2026-05-25] (Lần 6) - Phase 1.4 Mobile Auth (Partial)
+- ✅ **Mobile**: Tạo `src/types/index.ts` — interfaces `User`, `AuthState`, `AuthResponse`, `ApiResponse<T>`.
+- ✅ **Mobile**: Tạo `src/constants/config.ts` — `API_BASE_URL`, `API_TIMEOUT`.
+- ✅ **Mobile**: Tạo `src/services/api.ts` — Axios instance với request interceptor (gắn Bearer token) và response interceptor (tự refresh khi 401, queue pattern).
+- ✅ **Mobile**: Tạo `src/services/authService.ts` — wrap `register`, `login`, `refresh`, `logout`.
+- ✅ **Mobile**: Tạo `src/stores/authStore.ts` (Zustand) — lưu token vào AsyncStorage, actions: `login`, `register`, `logout`, `loadFromStorage`.
+- ✅ **Mobile**: Tạo `src/navigation/AuthNavigator.tsx` — Stack: Splash → Login → Register.
+- 🔄 **Mobile**: `AppNavigator`, `RootNavigator`, Auth Screens đang thực hiện.
+
+## [2026-05-25] (Lần 5) - Phase 1.3 Backend Auth
+
+- ✅ **Backend**: Tạo `src/types/index.ts` — interfaces `JwtPayload`, `AuthRequest`, `RegisterBody`, `LoginBody`.
+- ✅ **Backend**: Tạo `src/utils/jwt.ts` — `signAccessToken`, `signRefreshToken`, `verifyAccessToken`, `verifyRefreshToken`.
+- ✅ **Backend**: Tạo `src/models/User.ts` — Mongoose Schema đầy đủ theo PRD, indexes cho `email`, `googleId`, `appleId`.
+- ✅ **Backend**: Tạo `src/models/index.ts` — barrel export.
+- ✅ **Backend**: Tạo `src/middleware/auth.ts` — `authenticateToken` middleware verify Bearer JWT.
+- ✅ **Backend**: Tạo `src/controllers/authController.ts` — `register`, `login`, `refresh`, `logout`, `getMe`.
+- ✅ **Backend**: Tạo `src/routes/auth.ts` — mount 5 auth routes.
+- ✅ **Backend**: Cập nhật `src/index.ts` — enable MongoDB connect, mount `/api/auth` router, thêm 404 handler.
+- ✅ **Backend**: Tạo file `.env` template với `MONGODB_URI`, `JWT_SECRET`, `JWT_REFRESH_SECRET`.
 
 ## [2026-05-21] (Lần 4) - Xây dựng Design System
 - ✅ **Mobile**: Cài đặt font `Nunito` và `Space Mono`.
