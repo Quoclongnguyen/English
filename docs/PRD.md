@@ -119,4 +119,54 @@ Ghi nhận huy hiệu user đạt được (`streak_7`, `words_100`...).
 - ❌ Offline mode đầy đủ
 - ❌ Social features (friend, share)
 - ❌ In-app purchase / subscription
-- ❌ Web version
+- ❌ Web version (cho người dùng) — chỉ có Admin web
+
+---
+
+## 5. 🖥️ Admin Dashboard (Web)
+
+> **Mô tả:** Web app quản trị riêng tại `/admin/`. Chỉ user có `role: "admin"` trong MongoDB mới truy cập được.
+> **Tech:** React (Vite) + TypeScript. Dùng chung backend Node.js.
+> **URL:** admin.lexis.app
+
+### 5.1 Quản lý Người dùng
+- 🔲 Xem danh sách users: tên, email, level, goal, streak, từ đã học, tiến độ, trạng thái
+- 🔲 Thống kê: tổng users, active hôm nay, users mới tuần này, số bị block
+- 🔲 Block / Unblock user vi phạm
+- 🔲 Xem tiến độ học của từng user
+- 🔲 Xử lý báo cáo vi phạm (xem, block, bỏ qua)
+
+### 5.2 Quản lý Nội dung
+- 🔲 **Từ vựng:** Thêm/sửa/xóa từ, filter theo topic và level
+  - AI Auto-Fill: chỉ nhập "Word" → Generate by Gemini → tự điền IPA, Meaning, Example
+  - Bulk Import/Export: nhập hàng loạt từ file Excel/CSV
+  - Audio Preview: nghe thử TTS trước khi lưu
+- 🔲 **Bài học (Listening + Reading):** Thêm/sửa/xóa bài, trạng thái Published/Draft
+  - Interactive Editor: "Tag" từ vựng ngay trong bài đọc → user click → hiện nghĩa + lưu Vocab Bank
+  - Question Bank: quản lý kho câu hỏi MCQ riêng, gắn vào bài học tùy ý
+- 🔲 **Ngữ pháp:** Danh sách chủ điểm, số bài, số bài tập, lượt học
+
+### 5.3 Thống kê & Analytics
+- 🔲 Dashboard: tổng users, active hôm nay, từ đã học, 7-day retention
+- 🔲 Biểu đồ lượt học theo ngày (Vocabulary vs Bài học)
+- 🔲 Phân bố trình độ: A1/A2/B1/B2/C1 (donut chart)
+- 🔲 Retention Rate: D1/D3/D7/D14/D30
+- 🔲 Tính năng phổ biến nhất theo lượt dùng
+- 🔲 Popular Words: từ nào được lưu nhiều nhất / sai nhiều nhất
+- 🔲 New users — 30 ngày
+
+### 5.4 Quản lý Notifications
+- 🔲 Soạn thông báo: tiêu đề, nội dung, loại (Word of Day / Streak / Review / Custom)
+- 🔲 Segmentation: gửi theo level (A1, B1...) hoặc goal (IELTS, TOEIC) hoặc điều kiện (chưa học hôm nay, streak sắp gãy)
+- 🔲 Preview thông báo trên màn hình giả lập điện thoại
+- 🔲 Scheduled Push: lên lịch gửi tự động (ví dụ: 8h tối hàng ngày)
+- 🔲 Lịch sử gửi: tiêu đề, đối tượng, đã gửi, tỷ lệ mở, tỷ lệ click
+
+### 5.5 Cài đặt Hệ thống
+- 🔲 Cấu hình: tên app, Gemini API key, max daily words, maintenance mode
+- 🔲 Log System: theo dõi yêu cầu gửi đến Gemini API (chi phí, lỗi)
+- 🔲 User Reports Handling: khu vực phản hồi báo cáo lỗi / thắc mắc từ users
+
+### 5.6 Phân quyền
+- Chỉ user có `role: "admin"` trong MongoDB mới truy cập được Admin Dashboard
+- Backend middleware kiểm tra role trước khi xử lý bất kỳ `/api/admin/*` request nào

@@ -2,8 +2,8 @@
 
 > **Mục tiêu:** Ứng dụng học tiếng Anh toàn diện trên mobile (iOS & Android)
 > **Tech Stack:** React Native (Expo) · TypeScript · Node.js · MongoDB
-> **Trạng thái dự án:** 🟡 Khởi động — Giai đoạn lên kế hoạch
-> **Cập nhật lần cuối:** 2026-05-21
+> **Trạng thái dự án:** 🟡 Phase 1 đang thực hiện
+> **Cập nhật lần cuối:** 2026-06-01
 
 ---
 
@@ -86,6 +86,14 @@ English/
 │   │   ├── services/         ← Gemini service, SM-2
 │   │   └── utils/
 │   └── package.json
+└── admin/                    ← Web app quản trị (React)
+    ├── src/
+    │   ├── pages/            ← Dashboard, Users, Vocab, Lessons...
+    │   ├── components/       ← Shared UI components
+    │   ├── services/         ← API calls đến backend
+    │   ├── stores/           ← Zustand stores (auth, filters)
+    │   └── types/            ← TypeScript types
+    └── package.json
 ```
 
 ---
@@ -237,8 +245,11 @@ Always read:
 2. docs/PRD.md
 3. docs/DESIGN.md
 4. docs/API.md
+5. docs/CHANGELOG.md  ← Check trước để biết đang làm đến đâu, tránh làm lại
 
 before generating code.
+
+Then follow **Git Workflow** below before writing any code.
 
 ---
 
@@ -276,3 +287,70 @@ Do NOT:
 - introduce Redux
 - introduce unnecessary libraries
 - generate giant files (>300 lines) unless necessary
+- write Admin code inside /mobile/ or vice versa — Admin web app nằm trong /admin/
+
+---
+
+## Extra Rules
+
+- Check CHANGELOG.md trước khi code để biết đã làm gì rồi, tránh làm lại
+- Sau khi xong mỗi task, đề xuất update CHANGELOG.md
+- Admin web app nằm trong /admin/, không lẫn với /mobile/
+- Admin dùng design riêng: font Geist, Dark only, Minimal & data-dense (xem DESIGN.md Section 6)
+
+---
+
+## 🌿 Git Workflow (Bắt buộc cho mọi task)
+
+### Quy tắc
+Mỗi task / nhiệm vụ = 1 branch riêng. **Không code trực tiếp trên `main`.**
+
+### Quy ước đặt tên branch
+```
+feat/<tên-tính-năng>      ← Tính năng mới
+fix/<mô-tả-bug>           ← Sửa bug
+chore/<việc-khác>         ← Config, docs, refactor
+admin/<tên-module>        ← Riêng cho Admin web app
+```
+
+Ví dụ:
+- `feat/auth-screens` — làm Login/Register Screen
+- `feat/daily-vocab` — làm Daily Vocabulary
+- `admin/dashboard` — làm Admin Dashboard
+- `fix/refresh-token-loop` — sửa lỗi refresh token
+
+### Quy trình cụ thể
+
+**Bước 1 — Trước khi bắt đầu:**
+```bash
+git checkout main
+git pull origin main
+git checkout -b feat/<tên-task>
+```
+
+**Bước 2 — Trong quá trình làm, commit thường xuyên:**
+```bash
+git add .
+git commit -m "<loại>(<scope>): <mô tả>"
+```
+
+Ví dụ commit message:
+- `feat(auth): add LoginScreen with email/password form`
+- `feat(vocab): implement SM-2 spaced repetition algorithm`
+- `fix(api): handle 401 refresh token loop`
+- `chore(docs): update CHANGELOG.md`
+
+**Bước 3 — Sau khi xong task:**
+```bash
+git add .
+git commit -m "chore(docs): update CHANGELOG.md"
+git push origin feat/<tên-task>
+```
+
+> ✅ Sau đó tạo Pull Request trên GitHub và merge vào `main`.
+
+### Lưu ý quan trọng
+- **Luôn** tạo branch trước khi bắt đầu viết code
+- **Luôn** update `CHANGELOG.md` trước lần commit cuối
+- **Không** push thẳng lên `main`
+- Mỗi commit nên nhỏ và rõ ý nghĩa (1 việc = 1 commit)

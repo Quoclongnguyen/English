@@ -56,6 +56,85 @@ PUT    /api/users/profile                 # Cập nhật thông tin profile (ava
 POST   /api/users/streak-freeze/use       # Sử dụng vật phẩm "Streak Freeze" (bảo vệ chuỗi)
 ```
 
+## 8. Notifications (`/api/notifications`)
+```http
+POST   /api/notifications/register-token  # Lưu Expo push token của device
+DELETE /api/notifications/token           # Xóa token khi đăng xuất
+```
+
+---
+
+## 9. Admin — Chỉ role: "admin" (`/api/admin`)
+
+### 9.1 Dashboard & Analytics
+```http
+GET    /api/admin/stats                        # Tổng quan: total users, active hôm nay, từ học, retention
+GET    /api/admin/stats/daily?days=7           # Lượt học theo ngày (Vocab vs Lesson)
+GET    /api/admin/stats/level-distribution     # Phân bố trình độ user (A1/A2/B1/B2/C1)
+GET    /api/admin/stats/retention              # Retention D1/D3/D7/D14/D30
+GET    /api/admin/stats/popular-features       # Tính năng phổ biến theo lượt dùng
+GET    /api/admin/stats/popular-words          # Từ được lưu nhiều nhất / sai nhiều nhất
+GET    /api/admin/stats/new-users?days=30      # Số user đăng ký mỗi ngày trong 30 ngày
+GET    /api/admin/activity                     # Feed hoạt động gần đây
+```
+
+### 9.2 Quản lý Users
+```http
+GET    /api/admin/users?page=&limit=&level=&status=   # Danh sách users (có filter)
+GET    /api/admin/users/:id                           # Chi tiết user + tiến độ học
+PUT    /api/admin/users/:id/block                     # Block user
+PUT    /api/admin/users/:id/unblock                   # Unblock user
+```
+
+### 9.3 Báo cáo vi phạm
+```http
+GET    /api/admin/reports                # Lấy danh sách báo cáo vi phạm chưa xử lý
+PUT    /api/admin/reports/:id/resolve    # Đánh dấu đã xử lý (kèm action: block/ignore)
+```
+
+### 9.4 Quản lý Từ vựng
+```http
+GET    /api/admin/words?topic=&level=    # Danh sách từ trong hệ thống
+POST   /api/admin/words                 # Thêm từ mới (hoặc dùng AI auto-fill từ Gemini)
+PUT    /api/admin/words/:id             # Sửa từ
+DELETE /api/admin/words/:id             # Xóa từ
+POST   /api/admin/words/bulk-import     # Nhập hàng loạt từ file CSV/Excel
+GET    /api/admin/words/export          # Export toàn bộ từ ra CSV
+POST   /api/admin/words/ai-fill         # Gemini tự sinh IPA, Meaning, Example cho 1 từ
+```
+
+### 9.5 Quản lý Bài học
+```http
+GET    /api/admin/lessons?type=&level=  # Danh sách bài học (Listening/Reading)
+POST   /api/admin/lessons               # Tạo bài học mới
+PUT    /api/admin/lessons/:id           # Sửa bài học
+DELETE /api/admin/lessons/:id           # Xóa bài học
+PUT    /api/admin/lessons/:id/publish   # Xuất bản / gỡ xuất bản bài học
+```
+
+### 9.6 Quản lý Ngữ pháp
+```http
+GET    /api/admin/grammar/topics           # Danh sách chủ điểm ngữ pháp
+POST   /api/admin/grammar/topics           # Tạo chủ điểm mới
+PUT    /api/admin/grammar/topics/:id       # Sửa chủ điểm
+DELETE /api/admin/grammar/topics/:id       # Xóa chủ điểm
+```
+
+### 9.7 Quản lý Notifications (Admin gửi)
+```http
+POST   /api/admin/notifications/send         # Gửi push notification ngay
+POST   /api/admin/notifications/schedule     # Lên lịch gửi tự động
+GET    /api/admin/notifications/history      # Lịch sử đã gửi (kèm tỷ lệ mở, click)
+DELETE /api/admin/notifications/:id          # Hủy lịch thông báo chưa gửi
+```
+
+### 9.8 Cài đặt
+```http
+GET    /api/admin/settings                   # Lấy cấu hình app
+PUT    /api/admin/settings                   # Cập nhật cấu hình (Gemini key, max words, maintenance)
+GET    /api/admin/logs/gemini?limit=          # Log các yêu cầu đã gửi đến Gemini API
+```
+
 ---
 
 ## 🤖 Gemini Prompt Templates
