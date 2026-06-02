@@ -4,11 +4,17 @@
 
 ## [Unreleased]
 ### Kế hoạch tiếp theo
-- Hoàn thiện Auth Screens: `SplashScreen`, `LoginScreen`, `RegisterScreen`.
-- Cập nhật `App.tsx` dùng Root Navigator.
 - Test end-to-end: Register → Login → navigate vào App.
 - Điền `MONGODB_URI` thật vào `.env` và kết nối MongoDB Atlas.
+- Sau khi Auth xong → bắt đầu Phase 1.5 Onboarding
 
+## [2026-06-02] - Phase 1.4 Mobile Auth (Completed)
+- ✅ **Mobile**: Tạo component `Input` dùng chung.
+- ✅ **Mobile**: Dựng UI màn hình `SplashScreen` với animation fade-in.
+- ✅ **Mobile**: Dựng UI màn hình `LoginScreen` và `RegisterScreen`, gọi các hàm trong `authStore`.
+- ✅ **Mobile**: Tạo `AppNavigator` làm Bottom Tab Navigator với tab `Home` tạm.
+- ✅ **Mobile**: Tạo `RootNavigator` (`index.tsx`) chuyển luồng dựa trên biến `isAuthenticated`.
+- ✅ **Mobile**: Cập nhật `App.tsx` sử dụng `RootNavigator`.
 ## [2026-05-25] (Lần 6) - Phase 1.4 Mobile Auth (Partial)
 - ✅ **Mobile**: Tạo `src/types/index.ts` — interfaces `User`, `AuthState`, `AuthResponse`, `ApiResponse<T>`.
 - ✅ **Mobile**: Tạo `src/constants/config.ts` — `API_BASE_URL`, `API_TIMEOUT`.

@@ -194,3 +194,22 @@ Giải thích câu sau bằng tiếng Việt đơn giản, dễ hiểu:
 Tập trung vào: cấu trúc ngữ pháp, từ vựng khó, cách dùng.
 Ngắn gọn, tối đa 3-4 câu.
 ```
+### Prompt 4: Admin AI Auto-Fill (Điền thông tin từ vựng)
+```text
+Bạn là từ điển tiếng Anh chuyên nghiệp.
+Cho từ: "{word}"
+
+Điền đầy đủ các trường sau:
+- phonetic: phiên âm IPA chuẩn
+- type: loại từ (noun/verb/adjective/adverb)
+- meaning_vi: nghĩa tiếng Việt ngắn gọn
+- example: 1 câu ví dụ tự nhiên, ngữ cảnh công việc hoặc học tập
+
+Trả về JSON:
+{
+  "phonetic": "...",
+  "type": "...",
+  "meaning_vi": "...",
+  "example": "..."
+}
+```
