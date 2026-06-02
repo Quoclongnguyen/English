@@ -1,62 +1,48 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import HomeScreen from '../screens/app/HomeScreen';
+import { useThemeStore } from '../stores/themeStore';
 
-// Types
-export type AuthStackParamList = {
-  Splash: undefined;
-  Login: undefined;
-  Register: undefined;
-  OnboardingGoal: undefined;
-  OnboardingTarget: undefined;
-  PlacementTest: undefined;
-  PlacementResult: { score: number };
-};
-
-export type MainTabParamList = {
+export type AppTabParamList = {
   Home: undefined;
-  VocabBank: undefined;
-  Camera: undefined;
-  Learn: undefined;
-  Profile: undefined;
 };
 
-export type RootStackParamList = {
-  Auth: undefined;
-  Main: undefined;
+const Tab = createBottomTabNavigator<AppTabParamList>();
+
+const AppNavigator = () => {
+  const { colors } = useThemeStore();
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: colors.surface,
+          borderBottomWidth: 1,
+          borderBottomColor: colors.border,
+        },
+        headerTintColor: colors.text,
+        tabBarStyle: {
+          backgroundColor: colors.surface,
+          borderTopWidth: 1,
+          borderTopColor: colors.border,
+        },
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.text2,
+      }}
+    >
+      <Tab.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home-outline" size={size} color={color} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
 };
 
-const RootStack = createNativeStackNavigator<RootStackParamList>();
-const AuthStack = createNativeStackNavigator<AuthStackParamList>();
-
-// Placeholder screens — sẽ được thay thế dần
-import { SplashScreen } from '../screens/auth/SplashScreen';
-import { LoginScreen } from '../screens/auth/LoginScreen';
-import { OnboardingGoalScreen } from '../screens/auth/OnboardingGoalScreen';
-import { OnboardingTargetScreen } from '../screens/auth/OnboardingTargetScreen';
-import { PlacementTestScreen } from '../screens/auth/PlacementTestScreen';
-import { PlacementResultScreen } from '../screens/auth/PlacementResultScreen';
-
-function AuthNavigator() {
-  return (
-    <AuthStack.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
-      <AuthStack.Screen name="Splash" component={SplashScreen} />
-      <AuthStack.Screen name="Login" component={LoginScreen} />
-      <AuthStack.Screen name="OnboardingGoal" component={OnboardingGoalScreen} />
-      <AuthStack.Screen name="OnboardingTarget" component={OnboardingTargetScreen} />
-      <AuthStack.Screen name="PlacementTest" component={PlacementTestScreen} />
-      <AuthStack.Screen name="PlacementResult" component={PlacementResultScreen} />
-    </AuthStack.Navigator>
-  );
-}
-
-export function AppNavigator() {
-  return (
-    <NavigationContainer>
-      <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen name="Auth" component={AuthNavigator} />
-        {/* Main tab navigator sẽ được thêm sau khi có auth */}
-      </RootStack.Navigator>
-    </NavigationContainer>
-  );
-}
+export default AppNavigator;
