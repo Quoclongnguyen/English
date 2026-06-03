@@ -20,6 +20,7 @@ export interface AuthState {
   refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isInitializing: boolean;
 }
 
 export interface LoginPayload {

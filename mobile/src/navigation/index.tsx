@@ -6,13 +6,13 @@ import AppNavigator from './AppNavigator';
 import SplashScreen from '../screens/auth/SplashScreen';
 
 const RootNavigator = () => {
-  const { isAuthenticated, isLoading, loadFromStorage } = useAuthStore();
+  const { isAuthenticated, isInitializing, loadFromStorage } = useAuthStore();
 
   useEffect(() => {
     loadFromStorage();
   }, [loadFromStorage]);
 
-  if (isLoading) {
+  if (isInitializing) {
     return <SplashScreen />;
   }
 

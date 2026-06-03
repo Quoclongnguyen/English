@@ -18,7 +18,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
   accessToken: null,
   refreshToken: null,
   isAuthenticated: false,
-  isLoading: true,
+  isLoading: false,
+  isInitializing: true,
 
   // Load tokens from AsyncStorage on app start
   loadFromStorage: async () => {
@@ -32,12 +33,12 @@ export const useAuthStore = create<AuthStore>((set) => ({
       const refresh = refreshToken[1];
 
       if (access && refresh) {
-        set({ accessToken: access, refreshToken: refresh, isAuthenticated: true, isLoading: false });
+        set({ accessToken: access, refreshToken: refresh, isAuthenticated: true, isInitializing: false });
       } else {
-        set({ isLoading: false });
+        set({ isInitializing: false });
       }
     } catch {
-      set({ isLoading: false });
+      set({ isInitializing: false });
     }
   },
 
