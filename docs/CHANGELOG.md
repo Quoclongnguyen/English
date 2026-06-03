@@ -6,7 +6,16 @@
 ### Kế hoạch tiếp theo
 - Test end-to-end: Register → Login → navigate vào App.
 - Điền `MONGODB_URI` thật vào `.env` và kết nối MongoDB Atlas.
+- Cân nhắc làm Google OAuth / Apple Sign In sau khi email auth đã test end-to-end ổn định.
 - Sau khi Auth xong → bắt đầu Phase 1.5 Onboarding
+
+## [2026-06-03] - Phase 1.4 Auth UI Polish
+- ✅ **Mobile**: Cập nhật `LoginScreen` theo design: hero LEXIS, nền tím/xanh, copy tiếng Việt.
+- ✅ **Mobile**: Thêm lựa chọn đăng nhập bằng Apple, Google và Email trên `LoginScreen`.
+- ✅ **Mobile**: Cập nhật `RegisterScreen` cùng phong cách với Login: hero LEXIS, Apple / Google / Email.
+- ✅ **Mobile**: Bấm Email mới mở form email/password hoặc form đăng ký.
+- ℹ️ **Mobile**: Google / Apple hiện là UI placeholder và hiển thị thông báo, OAuth backend chưa cấu hình.
+- ✅ **Verification**: `npx.cmd tsc --noEmit` pass trong thư mục `mobile`.
 
 ## [2026-06-02] - Phase 1.4 Mobile Auth (Completed)
 - ✅ **Mobile**: Tạo component `Input` dùng chung.

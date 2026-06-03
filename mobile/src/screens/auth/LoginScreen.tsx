@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, Alert, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, Alert, ScrollView, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { useAuthStore } from '../../../src/stores/authStore';
 import { useThemeStore } from '../../../src/stores/themeStore';
 import { Button } from '../../../src/components/Button';
@@ -12,13 +13,18 @@ import { useNavigation } from '@react-navigation/native';
 type LoginScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Login'>;
 
 const LoginScreen = () => {
-  const { colors } = useThemeStore();
+  const { colors, theme } = useThemeStore();
   const navigation = useNavigation<LoginScreenNavigationProp>();
   const { login, isLoading } = useAuthStore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showEmailForm, setShowEmailForm] = useState(false);
+
+  const handleSocialLogin = (provider: 'Google' | 'Apple') => {
+    Alert.alert(`${provider} Sign In`, `Đăng nhập ${provider} sẽ hoạt động sau khi cấu hình OAuth.`);
+  };
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -40,44 +46,110 @@ const LoginScreen = () => {
       style={[styles.container, { backgroundColor: colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.header}>
-          <Text style={[styles.title, { color: colors.text }]}>Welcome Back</Text>
-          <Text style={[styles.subtitle, { color: colors.text }]}>Sign in to continue your journey</Text>
+      <ScrollView contentContainerStyle={[styles.scrollContent, { backgroundColor: colors.background }]}>
+        <View style={styles.hero}>
+          <View style={styles.heroPurple} />
+          <View style={styles.heroTeal} />
+          <View style={styles.heroOrbLeft} />
+          <View style={styles.heroOrbRight} />
+          <View style={styles.heroContent}>
+            <Text style={styles.logo}>LEXIS</Text>
+            <Text style={styles.heroText}>Học từ vựng qua ngữ cảnh thực tế</Text>
+            <Text style={styles.heroText}>AI giải thích theo cách bạn hiểu</Text>
+          </View>
         </View>
 
-        <View style={styles.form}>
-          <Input
-            label="Email"
-            placeholder="Enter your email"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            value={email}
-            onChangeText={(text) => { setEmail(text); setError(''); }}
-          />
-          <Input
-            label="Password"
-            placeholder="Enter your password"
-            secureTextEntry
-            value={password}
-            onChangeText={(text) => { setPassword(text); setError(''); }}
-            error={error}
-          />
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Text style={[styles.title, { color: colors.text }]}>Bắt đầu học ngay</Text>
+            <Text style={[styles.subtitle, { color: colors.textMuted }]}>Đăng nhập để lưu tiến độ của bạn</Text>
+          </View>
 
-          <Button
-            title="Log In"
-            onPress={handleLogin}
-            loading={isLoading}
-            style={styles.loginButton}
-          />
+          {!showEmailForm ? (
+            <View style={styles.authOptions}>
+              <TouchableOpacity
+                onPress={() => handleSocialLogin('Apple')}
+                activeOpacity={0.82}
+                style={[
+                  styles.socialButton,
+                  {
+                    backgroundColor: theme === 'dark' ? '#ECE9F7' : '#1B1733',
+                    borderColor: theme === 'dark' ? '#ECE9F7' : '#1B1733',
+                  },
+                ]}
+              >
+                <FontAwesome name="apple" size={20} color={theme === 'dark' ? '#1B1733' : '#FFFFFF'} />
+                <Text style={[styles.socialButtonText, { color: theme === 'dark' ? '#1B1733' : '#FFFFFF' }]}>
+                  Tiếp tục với Apple
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => handleSocialLogin('Google')}
+                activeOpacity={0.82}
+                style={[
+                  styles.socialButton,
+                  {
+                    backgroundColor: colors.surface,
+                    borderColor: colors.border,
+                  },
+                ]}
+              >
+                <FontAwesome name="google" size={18} color="#4285F4" />
+                <Text style={[styles.socialButtonText, { color: colors.text }]}>Tiếp tục với Google</Text>
+              </TouchableOpacity>
+              <View style={styles.dividerRow}>
+                <View style={[styles.dividerLine, { backgroundColor: colors.border }]} />
+                <Text style={[styles.dividerText, { color: colors.textMuted }]}>hoặc</Text>
+                <View style={[styles.dividerLine, { backgroundColor: colors.border }]} />
+              </View>
+              <Button
+                title="Đăng nhập bằng Email"
+                onPress={() => setShowEmailForm(true)}
+                icon={<FontAwesome name="envelope" size={18} color="#082014" />}
+              />
+            </View>
+          ) : (
+            <>
+              <Input
+                label="Email"
+                placeholder="Nhập email của bạn"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                value={email}
+                onChangeText={(text) => {
+                  setEmail(text);
+                  setError('');
+                }}
+              />
+              <Input
+                label="Password"
+                placeholder="Nhập mật khẩu"
+                secureTextEntry
+                value={password}
+                onChangeText={(text) => {
+                  setPassword(text);
+                  setError('');
+                }}
+                error={error}
+              />
+
+              <Button title="Đăng nhập" onPress={handleLogin} loading={isLoading} style={styles.loginButton} />
+              <Button
+                title="Quay lại lựa chọn"
+                onPress={() => setShowEmailForm(false)}
+                variant="ghost"
+                color="dark"
+              />
+            </>
+          )}
 
           <View style={styles.footer}>
-            <Text style={[styles.footerText, { color: colors.text }]}>Don't have an account? </Text>
+            <Text style={[styles.footerText, { color: colors.textMuted }]}>Chưa có tài khoản? </Text>
             <Text
               style={[styles.footerLink, { color: colors.primary }]}
               onPress={() => navigation.navigate('Register')}
             >
-              Sign Up
+              Đăng ký miễn phí
             </Text>
           </View>
         </View>
@@ -92,31 +164,118 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    justifyContent: 'center',
-    padding: 24,
+  },
+  hero: {
+    height: 420,
+    justifyContent: 'flex-end',
+    overflow: 'hidden',
+    padding: 28,
+  },
+  heroPurple: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#7C5CF6',
+  },
+  heroTeal: {
+    bottom: 0,
+    height: 210,
+    position: 'absolute',
+    right: -40,
+    transform: [{ rotate: '-18deg' }],
+    width: 230,
+    backgroundColor: '#00D68F',
+    opacity: 0.86,
+  },
+  heroOrbLeft: {
+    position: 'absolute',
+    top: -26,
+    left: -18,
+    width: 118,
+    height: 118,
+    borderRadius: 59,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+  },
+  heroOrbRight: {
+    position: 'absolute',
+    top: 44,
+    right: 18,
+    width: 82,
+    height: 82,
+    borderRadius: 41,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+  },
+  heroContent: {
+    marginBottom: 22,
   },
   header: {
-    marginBottom: 40,
+    marginBottom: 22,
+  },
+  logo: {
+    color: '#FFFFFF',
+    fontFamily: Typography.fontFamily.bold,
+    fontSize: 60,
+    letterSpacing: 0,
+    marginBottom: 10,
+  },
+  heroText: {
+    color: '#FFFFFF',
+    fontFamily: Typography.fontFamily.bold,
+    fontSize: 14,
+    lineHeight: 20,
+    opacity: 0.92,
   },
   title: {
     fontFamily: Typography.fontFamily.bold,
-    fontSize: 32,
+    fontSize: 24,
     marginBottom: 8,
   },
   subtitle: {
     fontFamily: Typography.fontFamily.regular,
+    fontSize: 13,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 28,
+  },
+  authOptions: {
+    gap: 12,
+  },
+  socialButton: {
+    alignItems: 'center',
+    borderRadius: 16,
+    borderWidth: 1,
+    flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'center',
+    minHeight: 56,
+    paddingHorizontal: 20,
+  },
+  socialButtonText: {
+    fontFamily: Typography.fontFamily.bold,
     fontSize: 16,
   },
-  form: {
-    gap: 8,
+  dividerRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 12,
+    marginVertical: 8,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+  },
+  dividerText: {
+    fontFamily: Typography.fontFamily.regular,
+    fontSize: 13,
   },
   loginButton: {
-    marginTop: 24,
-    marginBottom: 24,
+    marginTop: 12,
+    marginBottom: 8,
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginTop: 24,
   },
   footerText: {
     fontFamily: Typography.fontFamily.regular,

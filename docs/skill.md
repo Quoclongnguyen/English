@@ -3,7 +3,7 @@
 > **Mục tiêu:** Ứng dụng học tiếng Anh toàn diện trên mobile (iOS & Android)
 > **Tech Stack:** React Native (Expo) · TypeScript · Node.js · MongoDB
 > **Trạng thái dự án:** 🟡 Phase 1 đang thực hiện
-> **Cập nhật lần cuối:** 2026-06-01
+> **Cập nhật lần cuối:** 2026-06-03
 
 ---
 
@@ -151,15 +151,15 @@ English/
 - 🔲 Google OAuth (`passport-google-oauth20`) — tạm hoãn
 
 #### 1.4 Auth Screens (Mobile)
-- 🔄 `SplashScreen` — logo LEXIS + animation fade in
-- 🔄 `LoginScreen` — nút Google / Apple / Email
-- 🔄 `RegisterScreen` — form email + password
+- ✅ `SplashScreen` — logo LEXIS + animation fade in
+- ✅ `LoginScreen` — hero LEXIS + nút Apple / Google / Email, form email/password
+- ✅ `RegisterScreen` — hero LEXIS + nút Apple / Google / Email, form email/password
 - ✅ Zustand `authStore` — lưu token, user info
 - ✅ Axios interceptor — tự refresh token khi hết hạn
 - ✅ `src/services/authService.ts` — wrap API calls
 - ✅ `src/navigation/AuthNavigator.tsx` — Stack navigator
-- 🔄 `src/navigation/AppNavigator.tsx` — Bottom Tab navigator
-- 🔄 `src/navigation/index.tsx` — Root Navigator (Auth/App switch)
+- ✅ `src/navigation/AppNavigator.tsx` — Bottom Tab navigator
+- ✅ `src/navigation/index.tsx` — Root Navigator (Auth/App switch)
 
 #### 1.5 Onboarding
 - 🔲 `OnboardingGoalScreen` — chọn mục tiêu (4 lựa chọn)
