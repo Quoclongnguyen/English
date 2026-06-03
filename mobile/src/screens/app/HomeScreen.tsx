@@ -1,22 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useAuthStore } from '../../../stores/authStore';
-import { useThemeStore } from '../../../stores/themeStore';
-import { Button } from '../../../components/Button';
-import { Typography } from '../../../constants/typography';
+import { useAuthStore } from '../../../src/stores/authStore';
+import { useThemeStore } from '../../../src/stores/themeStore';
+import { Button } from '../../../src/components/Button';
+import { Typography } from '../../../src/constants/typography';
 
 const HomeScreen = () => {
   const { user, logout } = useAuthStore();
   const { colors } = useThemeStore();
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.bg }]}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={[styles.title, { color: colors.text }]}>Welcome, {user?.name || 'User'}!</Text>
-      <Text style={[styles.subtitle, { color: colors.text2 }]}>This is the placeholder Home Screen.</Text>
-      
-      <Button 
-        title="Log Out" 
-        onPress={logout} 
+      <Text style={[styles.subtitle, { color: colors.textMuted }]}>This is the placeholder Home Screen.</Text>
+
+      <Button
+        title="Log Out"
+        onPress={logout}
         variant="outline"
         color="dark"
         style={styles.logoutBtn}

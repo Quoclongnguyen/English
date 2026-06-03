@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, Alert, ScrollView } from 'react-native';
-import { useAuthStore } from '../../../stores/authStore';
-import { useThemeStore } from '../../../stores/themeStore';
-import { Button } from '../../../components/Button';
-import { Input } from '../../../components/Input';
-import { Typography } from '../../../constants/typography';
+import { useAuthStore } from '../../../src/stores/authStore';
+import { useThemeStore } from '../../../src/stores/themeStore';
+import { Button } from '../../../src/components/Button';
+import { Input } from '../../../src/components/Input';
+import { Typography } from '../../../src/constants/typography';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AuthStackParamList } from '../../../navigation/AuthNavigator';
+import { AuthStackParamList } from '../../../src/navigation/AuthNavigator';
 import { useNavigation } from '@react-navigation/native';
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Login'>;
@@ -26,7 +26,7 @@ const LoginScreen = () => {
       return;
     }
     setError('');
-    
+
     try {
       await login({ email, password });
       // On success, the root navigator will automatically switch to AppNavigator
@@ -36,14 +36,14 @@ const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView 
-      style={[styles.container, { backgroundColor: colors.bg }]} 
+    <KeyboardAvoidingView
+      style={[styles.container, { backgroundColor: colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text style={[styles.title, { color: colors.text }]}>Welcome Back</Text>
-          <Text style={[styles.subtitle, { color: colors.text2 }]}>Sign in to continue your journey</Text>
+          <Text style={[styles.subtitle, { color: colors.text }]}>Sign in to continue your journey</Text>
         </View>
 
         <View style={styles.form}>
@@ -63,17 +63,17 @@ const LoginScreen = () => {
             onChangeText={(text) => { setPassword(text); setError(''); }}
             error={error}
           />
-          
-          <Button 
-            title="Log In" 
-            onPress={handleLogin} 
+
+          <Button
+            title="Log In"
+            onPress={handleLogin}
             loading={isLoading}
             style={styles.loginButton}
           />
 
           <View style={styles.footer}>
-            <Text style={[styles.footerText, { color: colors.text2 }]}>Don't have an account? </Text>
-            <Text 
+            <Text style={[styles.footerText, { color: colors.text }]}>Don't have an account? </Text>
+            <Text
               style={[styles.footerLink, { color: colors.primary }]}
               onPress={() => navigation.navigate('Register')}
             >

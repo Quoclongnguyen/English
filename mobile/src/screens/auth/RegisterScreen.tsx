@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import { useAuthStore } from '../../../stores/authStore';
-import { useThemeStore } from '../../../stores/themeStore';
-import { Button } from '../../../components/Button';
-import { Input } from '../../../components/Input';
-import { Typography } from '../../../constants/typography';
+import { useAuthStore } from '../../../src/stores/authStore';
+import { useThemeStore } from '../../../src/stores/themeStore';
+import { Button } from '../../../src/components/Button';
+import { Input } from '../../../src/components/Input';
+import { Typography } from '../../../src/constants/typography';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AuthStackParamList } from '../../../navigation/AuthNavigator';
+import { AuthStackParamList } from '../../../src/navigation/AuthNavigator';
 import { useNavigation } from '@react-navigation/native';
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Register'>;
@@ -31,7 +31,7 @@ const RegisterScreen = () => {
       return;
     }
     setError('');
-    
+
     try {
       await register({ name, email, password });
       // On success, root navigator switches to AppNavigator
@@ -41,14 +41,14 @@ const RegisterScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView 
-      style={[styles.container, { backgroundColor: colors.bg }]} 
+    <KeyboardAvoidingView
+      style={[styles.container, { backgroundColor: colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text style={[styles.title, { color: colors.text }]}>Create Account</Text>
-          <Text style={[styles.subtitle, { color: colors.text2 }]}>Start your English journey today</Text>
+          <Text style={[styles.subtitle, { color: colors.textMuted }]}>Start your English journey today</Text>
         </View>
 
         <View style={styles.form}>
@@ -75,17 +75,17 @@ const RegisterScreen = () => {
             onChangeText={(text) => { setPassword(text); setError(''); }}
             error={error}
           />
-          
-          <Button 
-            title="Sign Up" 
-            onPress={handleRegister} 
+
+          <Button
+            title="Sign Up"
+            onPress={handleRegister}
             loading={isLoading}
             style={styles.registerButton}
           />
 
           <View style={styles.footer}>
-            <Text style={[styles.footerText, { color: colors.text2 }]}>Already have an account? </Text>
-            <Text 
+            <Text style={[styles.footerText, { color: colors.text }]}>Already have an account? </Text>
+            <Text
               style={[styles.footerLink, { color: colors.primary }]}
               onPress={() => navigation.navigate('Login')}
             >

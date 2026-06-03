@@ -15,10 +15,10 @@ const SplashScreen = () => {
   }, [fadeAnim]);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.bg }]}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Animated.View style={{ opacity: fadeAnim }}>
         <Text style={[styles.logoText, { color: colors.primary }]}>LEXIS</Text>
-        <Text style={[styles.subtitle, { color: colors.text2 }]}>Master English Faster</Text>
+        <Text style={[styles.subtitle, { color: colors.text }]}>Master English Faster</Text>
       </Animated.View>
     </View>
   );

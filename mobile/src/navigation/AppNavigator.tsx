@@ -29,12 +29,12 @@ const AppNavigator = () => {
           borderTopColor: colors.border,
         },
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.text2,
+        tabBarInactiveTintColor: colors.text,
       }}
     >
-      <Tab.Screen 
-        name="Home" 
-        component={HomeScreen} 
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />

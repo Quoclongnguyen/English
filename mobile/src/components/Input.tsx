@@ -13,18 +13,18 @@ export const Input = ({ label, error, style, ...props }: InputProps) => {
 
   return (
     <View style={styles.container}>
-      {label && <Text style={[styles.label, { color: colors.text2 }]}>{label}</Text>}
+      {label && <Text style={[styles.label, { color: colors.text }]}>{label}</Text>}
       <TextInput
         style={[
           styles.input,
-          { 
-            backgroundColor: colors.surface2, 
+          {
+            backgroundColor: colors.surface,
             color: colors.text,
             borderColor: error ? colors.warning : colors.border,
           },
           style,
         ]}
-        placeholderTextColor={colors.text3}
+        placeholderTextColor={colors.textMuted}
         {...props}
       />
       {error && <Text style={[styles.error, { color: colors.warning }]}>{error}</Text>}
