@@ -44,8 +44,8 @@ export const Button = ({
   const getTextColor = () => {
     if (variant === 'primary') {
       if (color === 'green') return '#082014'; // Dark text on green for contrast
-      if (color === 'light') return theme === 'dark' ? colors.bg : colors.text;
-      if (color === 'dark') return theme === 'dark' ? colors.text : colors.bg;
+      if (color === 'light') return theme === 'dark' ? colors.background : colors.text;
+      if (color === 'dark') return theme === 'dark' ? colors.text : colors.background;
       return '#FFFFFF';
     }
     

@@ -13,7 +13,7 @@ export const Card = ({ children, style, variant = 'surface' }: CardProps) => {
 
   const getBackgroundColor = () => {
     if (variant === 'surface') return colors.surface;
-    if (variant === 'surface2') return colors.surface2; 
+    if (variant === 'surface2') return colors.surface; 
     if (variant === 'surface3') return '#2A2A3A'; 
     if (variant === 'outlined') return 'transparent';
     return colors.surface;

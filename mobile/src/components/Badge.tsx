@@ -24,7 +24,7 @@ export const Badge = ({ label, icon, color = 'green', style, textStyle }: BadgeP
       case 'yellow': return { bg: isDark ? 'rgba(251,191,36,0.12)' : 'rgba(251,191,36,0.15)', text: colors.xp, border: 'rgba(251,191,36,0.25)' };
       case 'pink': return { bg: isDark ? 'rgba(244,114,182,0.12)' : 'rgba(244,114,182,0.15)', text: colors.badge, border: 'rgba(244,114,182,0.25)' };
       case 'teal': return { bg: isDark ? 'rgba(20,184,166,0.12)' : 'rgba(20,184,166,0.15)', text: '#14B8A6', border: 'rgba(20,184,166,0.25)' };
-      case 'gray': return { bg: colors.surface2, text: colors.text2, border: colors.border };
+      case 'gray': return { bg: colors.surface, text: colors.text, border: colors.border };
       default: return { bg: isDark ? 'rgba(0,214,143,0.12)' : 'rgba(0,214,143,0.15)', text: colors.primary, border: 'rgba(0,214,143,0.25)' };
     }
   };
