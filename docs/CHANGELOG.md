@@ -4,10 +4,16 @@
 
 ## [Unreleased]
 ### Kế hoạch tiếp theo
-- Test end-to-end: Register → Login → navigate vào App.
-- Điền `MONGODB_URI` thật vào `.env` và kết nối MongoDB Atlas.
+- Test mobile end-to-end: Register/Login từ app → lưu token → RootNavigator chuyển vào App.
 - Cân nhắc làm Google OAuth / Apple Sign In sau khi email auth đã test end-to-end ổn định.
 - Sau khi Auth xong → bắt đầu Phase 1.5 Onboarding
+
+## [2026-06-03] - Phase 1.3 Backend Auth API Tested
+- ✅ **Backend**: Test `POST /api/auth/register` thành công, trả `201 Created`.
+- ✅ **Backend**: Test `POST /api/auth/login` thành công, trả `200 OK`.
+- ✅ **Backend**: Test `GET /api/auth/me` với Bearer access token thành công, trả `200 OK`.
+- ✅ **Backend**: Xác nhận response auth trả `accessToken`, `refreshToken` và thông tin user.
+- ✅ **Backend**: Xác nhận MongoDB Atlas đã kết nối bằng dữ liệu user thật.
 
 ## [2026-06-03] - Phase 1.4 Auth UI Polish
 - ✅ **Mobile**: Cập nhật `LoginScreen` theo design: hero LEXIS, nền tím/xanh, copy tiếng Việt.

@@ -142,12 +142,13 @@ English/
 
 #### 1.3 Backend Setup
 - ✅ `npm init` + cài Express, Mongoose, TypeScript, dotenv
-- ✅ Kết nối MongoDB Atlas (code ready, cần điền `MONGODB_URI` thật vào `.env`)
+- ✅ Kết nối MongoDB Atlas
 - ✅ Model `User` + index
 - ✅ `POST /api/auth/register` — hash password bcrypt
 - ✅ `POST /api/auth/login` — trả JWT + Refresh Token
 - ✅ `POST /api/auth/refresh` — cấp lại access token
 - ✅ `GET /api/auth/me` — middleware xác thực
+- ✅ Test API thủ công: Register `201`, Login `200`, Me `200`
 - 🔲 Google OAuth (`passport-google-oauth20`) — tạm hoãn
 
 #### 1.4 Auth Screens (Mobile)
