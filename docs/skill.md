@@ -163,15 +163,15 @@ English/
 - ✅ `src/navigation/index.tsx` — Root Navigator (Auth/App switch)
 
 #### 1.5 Onboarding
-- 🔲 `OnboardingGoalScreen` — chọn mục tiêu (4 lựa chọn)
-- 🔲 `OnboardingTargetScreen` — chọn 5 / 7 / 10 từ/ngày
-- 🔲 `PlacementTestScreen` — 5 câu MCQ tăng dần độ khó
-- 🔲 `PlacementResultScreen` — hiển thị level + lộ trình
-- 🔲 API `POST /api/onboarding/placement-result`
-- 🔲 Logic: chỉ show onboarding 1 lần (lưu AsyncStorage)
+- ✅ `OnboardingGoalScreen` — chọn mục tiêu (4 lựa chọn)
+- ✅ `OnboardingTargetScreen` — chọn 5 / 7 / 10 từ/ngày
+- ✅ `PlacementTestScreen` — 5 câu MCQ tăng dần độ khó
+- ✅ `PlacementResultScreen` — hiển thị level + lộ trình
+- ✅ API `POST /api/onboarding/placement-result`
+- ✅ Logic: chỉ show onboarding 1 lần (lưu AsyncStorage)
 
 #### 1.6 Home Dashboard
-- 🔲 `HomeScreen` layout: header streak, daily goal ring, module grid
+- 🔄 `HomeScreen` layout: header streak, daily goal ring, module grid
 - 🔲 Component `StreakBanner` — hiển thị streak + flame icon
 - 🔲 Component `DailyGoalRing` — vòng tròn progress animated
 - 🔲 Component `ModuleCard` — 5 module (Vocab, Camera, Listen, Read, Grammar)

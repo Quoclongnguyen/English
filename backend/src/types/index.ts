@@ -28,3 +28,9 @@ export interface LoginBody {
   email: string;
   password: string;
 }
+
+export interface PlacementResultBody {
+  goal: 'ielts' | 'toeic' | 'business' | 'daily';
+  dailyTarget: 5 | 7 | 10;
+  level: 'A1' | 'A2' | 'B1' | 'B2';
+}

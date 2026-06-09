@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import authRouter from './routes/auth';
+import onboardingRouter from './routes/onboarding';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.get('/', (_req, res) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/onboarding', onboardingRouter);
 
 // 404 Handler
 app.use((_req, res) => {

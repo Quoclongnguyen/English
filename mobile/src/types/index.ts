@@ -46,3 +46,23 @@ export interface ApiResponse<T> {
   data?: T;
   message?: string;
 }
+
+// Onboarding
+
+export type LearningGoal = 'ielts' | 'toeic' | 'business' | 'daily';
+export type DailyTarget = 5 | 7 | 10;
+export type PlacementLevel = 'A1' | 'A2' | 'B1' | 'B2';
+
+export interface PlacementQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+}
+
+export interface OnboardingProfile {
+  goal: LearningGoal | null;
+  dailyTarget: DailyTarget | null;
+  level: PlacementLevel | null;
+  isCompleted: boolean;
+}
