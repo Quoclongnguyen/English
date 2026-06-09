@@ -3,6 +3,14 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Phase 1.5 Onboarding
+- ✅ **Mobile**: Thêm flow onboarding sau đăng nhập gồm chọn mục tiêu, chọn daily target, placement test 5 câu và màn kết quả level.
+- ✅ **Mobile**: Tạo `onboardingStore` lưu trạng thái hoàn thành onboarding bằng AsyncStorage để chỉ hiển thị một lần.
+- ✅ **Mobile**: Cập nhật `RootNavigator` để user đã đăng nhập nhưng chưa onboarding đi qua onboarding trước khi vào app.
+- ✅ **Backend**: Thêm `POST /api/onboarding/placement-result` để lưu `goal`, `dailyTarget`, `level` vào user hiện tại.
+- ✅ **Mobile**: Nối màn kết quả onboarding với API placement result trước khi đánh dấu hoàn thành local.
+- ✅ **Verification**: `npx.cmd tsc --noEmit` pass trong thư mục `mobile`; `npm.cmd run build` pass trong thư mục `backend`.
+
 ### Kế hoạch tiếp theo
 - Test mobile end-to-end: Register/Login từ app → lưu token → RootNavigator chuyển vào App.
 - Cân nhắc làm Google OAuth / Apple Sign In sau khi email auth đã test end-to-end ổn định.
