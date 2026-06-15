@@ -171,10 +171,10 @@ English/
 - ✅ Logic: chỉ show onboarding 1 lần (lưu AsyncStorage)
 
 #### 1.6 Home Dashboard
-- 🔄 `HomeScreen` layout: header streak, daily goal ring, module grid
-- 🔲 Component `StreakBanner` — hiển thị streak + flame icon
-- 🔲 Component `DailyGoalRing` — vòng tròn progress animated
-- 🔲 Component `ModuleCard` — 5 module (Vocab, Camera, Listen, Read, Grammar)
+- ✅ `HomeScreen` layout: header streak, daily goal ring, module grid
+- ✅ Component `StreakBanner` — hiển thị streak + flame icon
+- ✅ Component `DailyGoalRing` — vòng tròn progress animated
+- ✅ Component `ModuleCard` — 5 module (Vocab, Camera, Listen, Read, Grammar)
 
 ---
 

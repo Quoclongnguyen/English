@@ -3,6 +3,12 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Phase 1.6 Home Dashboard
+- ✅ **Mobile**: Cập nhật `HomeScreen` từ placeholder sang dashboard với header user, badge level/goal, streak, daily goal và module grid.
+- ✅ **Mobile**: Thêm component tái sử dụng `StreakBanner`, `DailyGoalRing`, `ModuleCard`.
+- ✅ **Mobile**: Ẩn native header của tab Home để dashboard dùng header riêng.
+- ✅ **Verification**: `npx.cmd tsc --noEmit` pass trong thư mục `mobile`.
+
 ### Phase 1.5 Onboarding
 - ✅ **Mobile**: Thêm flow onboarding sau đăng nhập gồm chọn mục tiêu, chọn daily target, placement test 5 câu và màn kết quả level.
 - ✅ **Mobile**: Tạo `onboardingStore` lưu trạng thái hoàn thành onboarding bằng AsyncStorage để chỉ hiển thị một lần.
