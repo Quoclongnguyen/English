@@ -179,12 +179,12 @@ English/
 ---
 
 ### 📚 Phase 2 — Vocabulary Core (Tháng 2)
-- 🔲 Daily Vocab + Gemini API integration
+- 🔄 Daily Vocab + Gemini API integration (Backend ✅, Mobile 🔲)
 - 🔲 Flashcard screen (lật 3D + TTS)
-- 🔲 SM-2 algorithm
-- 🔲 Review Quiz (3 dạng + giải thích sai/đúng)
-- 🔲 Vocab Bank + status labels
-- 🔲 Streak + XP + Notifications
+- ✅ SM-2 algorithm
+- 🔄 Review Quiz (3 dạng + giải thích sai/đúng) (Backend ✅, Mobile 🔲)
+- 🔄 Vocab Bank + status labels (Backend ✅, Mobile 🔲)
+- 🔄 Streak + XP + Notifications (Backend ✅, Mobile 🔲)
 
 ### Phase 3 — Differentiator (Tháng 3)
 - 🔲 Camera Vocabulary (Gemini Vision + checklist)

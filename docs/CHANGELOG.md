@@ -3,6 +3,13 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Phase 2 Vocabulary Core (Backend)
+- ✅ **Backend**: Thêm model `Word` và `UserWordProgress` hỗ trợ thuật toán SM-2.
+- ✅ **Backend**: Viết logic `sm2Service.ts` tính toán `interval` và `easeFactor` chuẩn theo SM-2.
+- ✅ **Backend**: Tích hợp `geminiService.ts` sử dụng `@google/generative-ai` gọi Gemini 1.5 Pro sinh từ vựng.
+- ✅ **Backend**: Thêm `wordController.ts` và route `/api/words/daily`, `/api/words/bank`, `/api/words/review`, `/api/words/progress`.
+- ✅ **Verification**: `npx.cmd tsc --noEmit` pass trong thư mục `backend`.
+
 ### Phase 1.6 Home Dashboard
 - ✅ **Mobile**: Cập nhật `HomeScreen` từ placeholder sang dashboard với header user, badge level/goal, streak, daily goal và module grid.
 - ✅ **Mobile**: Thêm component tái sử dụng `StreakBanner`, `DailyGoalRing`, `ModuleCard`.
