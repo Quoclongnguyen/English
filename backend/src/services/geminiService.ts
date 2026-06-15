@@ -5,7 +5,7 @@ dotenv.config();
 
 const apiKey = process.env.GEMINI_API_KEY || '';
 const genAI = new GoogleGenerativeAI(apiKey);
-
+const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
 export interface DailyWordParams {
   level: string;
   goal: string;
@@ -48,13 +48,13 @@ const responseSchema: Schema = {
   required: ["words", "story"],
 };
 
-export const generateDailyVocab = async (params: DailyWordParams): Promise<DailyVocabResult> => {
+export const generateDailyVocab = async (params: DailyWordParams, retries = 3): Promise<DailyVocabResult> => {
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY is not configured.");
   }
 
   const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-pro",
+    model: "gemini-2.5-flash",
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema: responseSchema,
@@ -74,10 +74,14 @@ Tạo ${params.count} từ vựng phù hợp:
 
   const result = await model.generateContent(prompt);
   const text = result.response.text();
-  
+
   try {
     return JSON.parse(text) as DailyVocabResult;
-  } catch (error) {
+  } catch (error: any) {
+    if (error.status === 429 && retries > 0) {
+      await delay(40000); // đợi 40 giây
+      return generateDailyVocab(params, retries - 1);
+    }
     throw new Error("Failed to parse Gemini response");
   }
 };
