@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '../../../src/stores/authStore';
 import { useThemeStore } from '../../../src/stores/themeStore';
 import { Button } from '../../../src/components/Button';
@@ -43,6 +44,7 @@ const MODULES = [
 ] as const;
 
 const HomeScreen = () => {
+  const navigation = useNavigation<any>();
   const { user, logout } = useAuthStore();
   const { colors } = useThemeStore();
   const dailyTarget = user?.dailyTarget ?? 7;
@@ -86,7 +88,13 @@ const HomeScreen = () => {
             description={module.description}
             icon={module.icon}
             color={module.color}
-            onPress={() => undefined}
+            onPress={() => {
+              if (module.title === 'Vocabulary') {
+                navigation.navigate('DailyVocabScreen');
+              } else if (module.title === 'Reading') { // Use Reading or something else for Review for now as a placeholder
+                navigation.navigate('ReviewQuizScreen');
+              }
+            }}
           />
         ))}
       </View>
