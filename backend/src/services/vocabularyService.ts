@@ -249,18 +249,20 @@ export class VocabularyService {
       limit?: number;
     }
   ) {
-    let query = PhotoScan.find({ userId });
+    const filter: any = {
+      userId,
+      'savedWords.0': { $exists: true }
+    };
 
     // Search in story or words
     if (options?.search) {
-      query = query.find({
-        $or: [
-          { story: { $regex: options.search, $options: 'i' } },
-          { savedWords: { $regex: options.search.toLowerCase(), $options: 'i' } }
-        ]
-      });
+      filter.$or = [
+        { story: { $regex: options.search, $options: 'i' } },
+        { savedWords: { $regex: options.search.toLowerCase(), $options: 'i' } }
+      ];
     }
 
+    let query = PhotoScan.find(filter);
     // Sort options
     switch (options?.sort) {
       case 'oldest':
@@ -280,7 +282,7 @@ export class VocabularyService {
     const skip = (page - 1) * limit;
 
     const scans = await query.skip(skip).limit(limit).lean();
-    const total = await PhotoScan.countDocuments({ userId });
+    const total = await PhotoScan.countDocuments(filter);
 
     // For each scan, we can fetch full details of its saved words if needed
     // However, photo detail modal needs word translations.
