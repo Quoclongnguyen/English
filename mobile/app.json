@@ -28,7 +28,19 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "LEXIS cần camera để nhận diện từ vựng trong ảnh."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "LEXIS cần truy cập thư viện để chọn ảnh học từ vựng."
+        }
+      ]
     ]
   }
 }

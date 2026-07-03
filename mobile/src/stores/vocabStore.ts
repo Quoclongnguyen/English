@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 import { wordService } from '../services/wordService';
-import { Word, UserWordProgress } from '../types';
+import {
+  CameraWord,
+  PhotoScanResult,
+  SaveCameraWordsResponse,
+  UserWordProgress,
+  Word,
+} from '../types';
 
 interface VocabState {
   dailyWords: Word[];
@@ -9,12 +15,18 @@ interface VocabState {
   reviewQueue: UserWordProgress[];
   isLoading: boolean;
   error: string | null;
+  currentScanResult: PhotoScanResult | null;
+  isScanning: boolean;
+  isSavingScan: boolean;
 
   fetchDailyWords: () => Promise<void>;
   fetchVocabBank: (params?: { topic?: string; level?: string; status?: string }) => Promise<void>;
   fetchReviewQueue: () => Promise<void>;
   updateWordProgress: (wordId: string, quality: number) => Promise<void>;
   clearDailyWords: () => void;
+  scanPhoto: (base64Image: string, mimeType: string, localImageUri: string) => Promise<void>;
+  saveWordsFromScan: (selectedWords: CameraWord[]) => Promise<SaveCameraWordsResponse>;
+  clearScanResult: () => void;
 }
 
 export const useVocabStore = create<VocabState>((set, get) => ({
@@ -24,6 +36,9 @@ export const useVocabStore = create<VocabState>((set, get) => ({
   reviewQueue: [],
   isLoading: false,
   error: null,
+  currentScanResult: null,
+  isScanning: false,
+  isSavingScan: false,
 
   fetchDailyWords: async () => {
     set({ isLoading: true, error: null });
@@ -74,4 +89,34 @@ export const useVocabStore = create<VocabState>((set, get) => ({
   clearDailyWords: () => {
     set({ dailyWords: [], dailyStory: '' });
   },
+
+  scanPhoto: async (base64Image, mimeType, localImageUri) => {
+    set({ isScanning: true, error: null, currentScanResult: null });
+    try {
+      const result = await wordService.scanPhoto(base64Image, mimeType, localImageUri);
+      set({ currentScanResult: result, isScanning: false });
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Không thể phân tích ảnh.';
+      set({ error: message, isScanning: false });
+      throw new Error(message);
+    }
+  },
+
+  saveWordsFromScan: async (selectedWords) => {
+    const scan = get().currentScanResult;
+    if (!scan) throw new Error('Không tìm thấy kết quả quét.');
+
+    set({ isSavingScan: true, error: null });
+    try {
+      const result = await wordService.saveCameraWords(scan.photoScanId, selectedWords);
+      set({ isSavingScan: false });
+      return result;
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Không thể lưu từ.';
+      set({ error: message, isSavingScan: false });
+      throw new Error(message);
+    }
+  },
+
+  clearScanResult: () => set({ currentScanResult: null, error: null }),
 }));

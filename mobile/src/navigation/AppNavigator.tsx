@@ -3,11 +3,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/app/HomeScreen';
 import VocabBankScreen from '../screens/app/VocabBankScreen';
+import ProfileScreen from '../screens/app/ProfileScreen';
+import CameraScreen from '../screens/app/CameraScreen';
 import { useThemeStore } from '../stores/themeStore';
 
 export type AppTabParamList = {
   Home: undefined;
   VocabBank: undefined;
+  Camera: undefined;
+  Profile: undefined;
 };
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
@@ -52,6 +56,28 @@ const AppNavigator = () => {
           tabBarLabel: 'Vocab',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="book-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Camera',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="camera-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" size={size} color={color} />
           ),
         }}
       />

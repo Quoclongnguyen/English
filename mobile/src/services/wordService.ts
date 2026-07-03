@@ -1,5 +1,12 @@
 import api from './api';
-import { Word, DailyVocabResponse, UserWordProgress } from '../types';
+import {
+  CameraWord,
+  DailyVocabResponse,
+  PhotoScanResult,
+  SaveCameraWordsResponse,
+  UserWordProgress,
+  Word,
+} from '../types';
 
 export const wordService = {
   getDailyWords: async (): Promise<DailyVocabResponse> => {
@@ -19,6 +26,23 @@ export const wordService = {
 
   updateProgress: async (wordId: string, quality: number): Promise<UserWordProgress> => {
     const response = await api.post('/api/words/progress', { wordId, quality });
+    return response.data;
+  },
+
+  scanPhoto: async (
+    base64Image: string,
+    mimeType: string,
+    localImageUri: string,
+  ): Promise<PhotoScanResult> => {
+    const response = await api.post('/api/words/camera-scan', { base64Image, mimeType });
+    return { ...response.data, localImageUri };
+  },
+
+  saveCameraWords: async (
+    photoScanId: string,
+    selectedWords: CameraWord[],
+  ): Promise<SaveCameraWordsResponse> => {
+    const response = await api.post('/api/words/camera', { photoScanId, selectedWords });
     return response.data;
   },
 };
