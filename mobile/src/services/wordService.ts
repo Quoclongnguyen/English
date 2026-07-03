@@ -3,6 +3,8 @@ import {
   CameraWord,
   DailyVocabResponse,
   PhotoScanResult,
+  PhotoDeckFilters,
+  PhotoDeckResponse,
   SaveCameraWordsResponse,
   UserWordProgress,
   Word,
@@ -43,6 +45,11 @@ export const wordService = {
     selectedWords: CameraWord[],
   ): Promise<SaveCameraWordsResponse> => {
     const response = await api.post('/api/words/camera', { photoScanId, selectedWords });
+    return response.data;
+  },
+
+  getPhotoDeck: async (filters: PhotoDeckFilters): Promise<PhotoDeckResponse> => {
+    const response = await api.get('/api/words/photo-deck', { params: filters });
     return response.data;
   },
 };
