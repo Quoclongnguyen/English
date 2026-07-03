@@ -187,7 +187,7 @@ English/
 - ✅ Streak + XP + Notifications
 
 ### Phase 3 — Differentiator (Tháng 3)
-- 🔲 Camera Vocabulary (Gemini Vision + checklist)
+- ✅ Camera Vocabulary (Gemini Vision + checklist)
 - 🔲 Photo Deck
 - 🔲 Streak Freeze
 - 🔲 Milestone Badges
