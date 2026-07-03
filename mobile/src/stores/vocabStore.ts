@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { wordService } from '../services/wordService';
 import {
   CameraWord,
+  PhotoDeckFilters,
+  PhotoDeckItem,
   PhotoScanResult,
   SaveCameraWordsResponse,
   UserWordProgress,
@@ -18,6 +20,11 @@ interface VocabState {
   currentScanResult: PhotoScanResult | null;
   isScanning: boolean;
   isSavingScan: boolean;
+  photoDeck: PhotoDeckItem[];
+  photoDeckFilters: PhotoDeckFilters;
+  photoDeckPages: number;
+  photoDeckTotal: number;
+  isLoadingPhotoDeck: boolean;
 
   fetchDailyWords: () => Promise<void>;
   fetchVocabBank: (params?: { topic?: string; level?: string; status?: string }) => Promise<void>;
@@ -27,6 +34,7 @@ interface VocabState {
   scanPhoto: (base64Image: string, mimeType: string, localImageUri: string) => Promise<void>;
   saveWordsFromScan: (selectedWords: CameraWord[]) => Promise<SaveCameraWordsResponse>;
   clearScanResult: () => void;
+  loadPhotoDeck: (filters?: Partial<PhotoDeckFilters>) => Promise<void>;
 }
 
 export const useVocabStore = create<VocabState>((set, get) => ({
@@ -39,6 +47,11 @@ export const useVocabStore = create<VocabState>((set, get) => ({
   currentScanResult: null,
   isScanning: false,
   isSavingScan: false,
+  photoDeck: [],
+  photoDeckFilters: { sort: 'recent', page: 1, limit: 10 },
+  photoDeckPages: 0,
+  photoDeckTotal: 0,
+  isLoadingPhotoDeck: false,
 
   fetchDailyWords: async () => {
     set({ isLoading: true, error: null });
@@ -119,4 +132,21 @@ export const useVocabStore = create<VocabState>((set, get) => ({
   },
 
   clearScanResult: () => set({ currentScanResult: null, error: null }),
+
+  loadPhotoDeck: async (filters) => {
+    const nextFilters = { ...get().photoDeckFilters, ...filters };
+    set({ isLoadingPhotoDeck: true, error: null, photoDeckFilters: nextFilters });
+    try {
+      const result = await wordService.getPhotoDeck(nextFilters);
+      set({
+        photoDeck: result.data,
+        photoDeckPages: result.pagination.pages,
+        photoDeckTotal: result.pagination.total,
+        isLoadingPhotoDeck: false,
+      });
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Không thể tải Photo Deck.';
+      set({ error: message, isLoadingPhotoDeck: false });
+    }
+  },
 }));
