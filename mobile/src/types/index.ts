@@ -103,3 +103,101 @@ export interface DailyVocabResponse {
   message?: string;
 }
 
+// Profile & gamification
+
+export interface UserBadge {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  unlocked: boolean;
+  unlockedAt?: string;
+  xpReward: number;
+  rarity: 'common' | 'uncommon' | 'rare';
+  requirement: {
+    type: 'streak' | 'vocabulary' | 'photoScans';
+    value: number;
+  };
+  currentProgress: number;
+  progress: number;
+}
+
+export interface WeeklyProgressDay {
+  dayName: string;
+  date: string;
+  xpEarned: number;
+  wordsLearned: number;
+  studied: boolean;
+}
+
+export interface UserStats {
+  currentStreak: number;
+  streakFreezes: number;
+  totalXP: number;
+  availableXP: number;
+  level: number;
+  vocabulary: {
+    total: number;
+    mastered: number;
+  };
+  todayStudied: boolean;
+  badges: UserBadge[];
+  weeklyProgress: WeeklyProgressDay[];
+}
+
+export interface CameraWord {
+  word: string;
+  phonetic: string;
+  meaning_vi: string;
+  example: string;
+}
+
+export interface PhotoScanResult {
+  photoScanId: string;
+  photoUrl: string;
+  localImageUri: string;
+  story: string;
+  words: CameraWord[];
+  fromCache: boolean;
+}
+
+export interface SaveCameraWordsResponse {
+  success: boolean;
+  newWordsCount: number;
+  duplicatesCount: number;
+  xpEarned: number;
+  message: string;
+  totalVocab: number;
+}
+
+export interface PhotoDeckWord extends CameraWord {
+  type: string;
+}
+
+export interface PhotoDeckItem {
+  _id: string;
+  photoUrl: string;
+  story: string;
+  savedWords: string[];
+  words: PhotoDeckWord[];
+  xpEarned: number;
+  createdAt: string;
+}
+
+export interface PhotoDeckFilters {
+  sort: 'recent' | 'oldest' | 'alphabetical';
+  search?: string;
+  page: number;
+  limit?: number;
+}
+
+export interface PhotoDeckResponse {
+  data: PhotoDeckItem[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
+}
+

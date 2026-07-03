@@ -91,6 +91,8 @@ const HomeScreen = () => {
             onPress={() => {
               if (module.title === 'Vocabulary') {
                 navigation.navigate('DailyVocabScreen');
+              } else if (module.title === 'Camera') {
+                navigation.navigate('Tabs', { screen: 'Camera' });
               } else if (module.title === 'Reading') { // Use Reading or something else for Review for now as a placeholder
                 navigation.navigate('ReviewQuizScreen');
               }

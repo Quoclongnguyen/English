@@ -3,6 +3,27 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Phase 3 Photo Deck (Mobile)
+- ✅ **Mobile**: Thêm tab Photo Deck trong Vocab Bank với search debounce, sort và pagination.
+- ✅ **Mobile**: Thêm grid ảnh 2 cột và `PhotoDetailModal` hiển thị story cùng flashcard chạm để lật.
+- ✅ **Mobile**: Chuẩn hóa URL ảnh cho cả local uploads và Cloudinary.
+- ✅ **Backend**: Chỉ trả scan đã lưu từ và dùng cùng filter cho dữ liệu lẫn tổng pagination.
+- ✅ **Verification**: TypeScript mobile và backend build đều pass.
+
+### Phase 3 Camera Vocabulary (Mobile)
+- ✅ **Mobile**: Thêm `CameraScreen` dùng Expo Camera, capture ảnh và gallery fallback cho emulator.
+- ✅ **Mobile**: Thêm `CameraChecklistScreen` hiển thị ảnh, mini-story và checklist từ Gemini trước khi lưu.
+- ✅ **Mobile**: Mở rộng `vocabStore` và `wordService` cho scan ảnh, lưu từ đã chọn, loading/error và kết quả XP.
+- ✅ **Mobile**: Thêm Camera tab, camera flow navigation và permission config cho iOS/Android.
+- ✅ **Verification**: TypeScript mobile và backend build đều pass.
+
+### Phase 3 Profile & Gamification (Mobile)
+- ✅ **Mobile**: Thêm `ProfileScreen` với thông tin người dùng, streak, freeze, XP theo level và thống kê từ vựng.
+- ✅ **Mobile**: Thêm `WeeklyChart`, `BadgeGrid`, pull-to-refresh và các trạng thái loading/error.
+- ✅ **Mobile**: Kết nối `GET /api/users/stats`, `POST /api/users/streak-freeze/buy` qua `userAPI` và Zustand `userStore`.
+- ✅ **Mobile**: Thêm tab Profile vào `AppNavigator`.
+- ✅ **Verification**: `npm.cmd exec -- tsc --noEmit` pass trong thư mục `mobile`.
+
 ### Phase 2 Vocabulary Core (Mobile)
 - ✅ **Mobile**: Khởi tạo `wordService.ts` và Zustand `vocabStore.ts` xử lý global state cho từ vựng.
 - ✅ **Mobile**: Tạo `VocabBankScreen` và thêm tab "Vocab" vào `AppNavigator`.
