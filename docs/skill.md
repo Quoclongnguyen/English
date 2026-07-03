@@ -188,10 +188,10 @@ English/
 
 ### Phase 3 — Differentiator (Tháng 3)
 - ✅ Camera Vocabulary (Gemini Vision + checklist)
-- 🔲 Photo Deck
-- 🔲 Streak Freeze
-- 🔲 Milestone Badges
-- 🔲 Profile + Progress screens
+- ✅ Photo Deck
+- ✅ Streak Freeze
+- ✅ Milestone Badges
+- ✅ Profile + Progress screens
 
 ### Phase 4 — Content (Tháng 4–5)
 - 🔲 Listening module (player + transcript + tap-to-save)

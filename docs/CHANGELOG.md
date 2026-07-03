@@ -3,6 +3,13 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Phase 3 Photo Deck (Mobile)
+- ✅ **Mobile**: Thêm tab Photo Deck trong Vocab Bank với search debounce, sort và pagination.
+- ✅ **Mobile**: Thêm grid ảnh 2 cột và `PhotoDetailModal` hiển thị story cùng flashcard chạm để lật.
+- ✅ **Mobile**: Chuẩn hóa URL ảnh cho cả local uploads và Cloudinary.
+- ✅ **Backend**: Chỉ trả scan đã lưu từ và dùng cùng filter cho dữ liệu lẫn tổng pagination.
+- ✅ **Verification**: TypeScript mobile và backend build đều pass.
+
 ### Phase 3 Camera Vocabulary (Mobile)
 - ✅ **Mobile**: Thêm `CameraScreen` dùng Expo Camera, capture ảnh và gallery fallback cho emulator.
 - ✅ **Mobile**: Thêm `CameraChecklistScreen` hiển thị ảnh, mini-story và checklist từ Gemini trước khi lưu.
