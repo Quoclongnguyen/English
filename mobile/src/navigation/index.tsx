@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useAuthStore } from '../stores/authStore';
 import { useOnboardingStore } from '../stores/onboardingStore';
 import AuthNavigator from './AuthNavigator';
-import AppNavigator from './AppNavigator';
+import MainNavigator from './MainNavigator';
 import OnboardingNavigator from './OnboardingNavigator';
 import SplashScreen from '../screens/auth/SplashScreen';
 
@@ -34,9 +34,10 @@ const RootNavigator = () => {
       {!isAuthenticated && <AuthNavigator />}
       {isAuthenticated && isOnboardingInitializing && <SplashScreen />}
       {isAuthenticated && !isOnboardingInitializing && !isOnboardingCompleted && <OnboardingNavigator />}
-      {isAuthenticated && !isOnboardingInitializing && isOnboardingCompleted && <AppNavigator />}
+      {isAuthenticated && !isOnboardingInitializing && isOnboardingCompleted && <MainNavigator />}
     </NavigationContainer>
   );
 };
 
 export default RootNavigator;
+

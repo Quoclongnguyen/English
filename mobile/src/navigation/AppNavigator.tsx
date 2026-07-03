@@ -2,10 +2,12 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/app/HomeScreen';
+import VocabBankScreen from '../screens/app/VocabBankScreen';
 import { useThemeStore } from '../stores/themeStore';
 
 export type AppTabParamList = {
   Home: undefined;
+  VocabBank: undefined;
 };
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
@@ -39,6 +41,17 @@ const AppNavigator = () => {
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="VocabBank"
+        component={VocabBankScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Vocab',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="book-outline" size={size} color={color} />
           ),
         }}
       />

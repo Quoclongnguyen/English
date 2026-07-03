@@ -3,6 +3,16 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Phase 2 Vocabulary Core (Mobile)
+- ✅ **Mobile**: Khởi tạo `wordService.ts` và Zustand `vocabStore.ts` xử lý global state cho từ vựng.
+- ✅ **Mobile**: Tạo `VocabBankScreen` và thêm tab "Vocab" vào `AppNavigator`.
+- ✅ **Mobile**: Xây dựng `DailyVocabScreen` hiển thị tiến trình loading từ Gemini, fetch 5/7/10 từ và mini-story.
+- ✅ **Mobile**: Cài đặt `expo-speech` và dùng `react-native-reanimated` thiết kế `FlashcardScreen` (lật 3D + Text-to-Speech).
+- ✅ **Mobile**: Xây dựng `ReviewQuizScreen` lấy hàng đợi (Queue) SM-2 từ backend và làm Quiz multiple choice. Có hiển thị phần giải thích (Explanation).
+- ✅ **Mobile**: Tạo `MainNavigator` mới gộp `AppNavigator` (Tabs) và các screens dạng Modal như Flashcard.
+- ✅ **Mobile**: Update `HomeScreen` dẫn hướng các nút Vocabulary và Review tới màn hình học tương ứng.
+- ✅ **Verification**: Chạy `npx tsc --noEmit` pass không còn lỗi.
+
 ### Phase 2 Vocabulary Core (Backend)
 - ✅ **Backend**: Thêm model `Word` và `UserWordProgress` hỗ trợ thuật toán SM-2.
 - ✅ **Backend**: Viết logic `sm2Service.ts` tính toán `interval` và `easeFactor` chuẩn theo SM-2.

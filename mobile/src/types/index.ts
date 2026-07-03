@@ -66,3 +66,40 @@ export interface OnboardingProfile {
   level: PlacementLevel | null;
   isCompleted: boolean;
 }
+
+// Vocabulary 
+
+export interface UserWordProgress {
+  _id: string;
+  userId: string;
+  wordId: string;
+  status: 'new' | 'learning' | 'reviewing' | 'mastered';
+  nextReviewDate: string;
+  reviewCount: number;
+  easeFactor: number;
+  interval: number;
+  lastResult?: 'correct' | 'wrong';
+}
+
+export interface Word {
+  _id: string;
+  word: string;
+  phonetic: string;
+  type: string;
+  meaning_vi: string;
+  example: string;
+  story?: string;
+  audioUrl?: string;
+  topic: string;
+  level: string;
+  source: 'daily' | 'camera';
+  progress?: UserWordProgress;
+}
+
+export interface DailyVocabResponse {
+  words: Word[];
+  story: string;
+  streak: number;
+  message?: string;
+}
+
