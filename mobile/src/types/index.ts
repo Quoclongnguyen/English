@@ -170,3 +170,34 @@ export interface SaveCameraWordsResponse {
   totalVocab: number;
 }
 
+export interface PhotoDeckWord extends CameraWord {
+  type: string;
+}
+
+export interface PhotoDeckItem {
+  _id: string;
+  photoUrl: string;
+  story: string;
+  savedWords: string[];
+  words: PhotoDeckWord[];
+  xpEarned: number;
+  createdAt: string;
+}
+
+export interface PhotoDeckFilters {
+  sort: 'recent' | 'oldest' | 'alphabetical';
+  search?: string;
+  page: number;
+  limit?: number;
+}
+
+export interface PhotoDeckResponse {
+  data: PhotoDeckItem[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
+}
+
