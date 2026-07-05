@@ -243,3 +243,38 @@ export interface SaveListeningWordResponse {
   alreadySaved: boolean;
 }
 
+// Reading
+
+export interface ReadingSection {
+  id: string;
+  order: number;
+  english: string;
+  vietnamese: string;
+}
+
+export interface ReadingPassage {
+  id: string;
+  title: string;
+  description?: string;
+  level: User['level'];
+  topic: string;
+  thumbnailUrl?: string;
+  estimatedReadingMinutes: number;
+  sections: ReadingSection[];
+  hasSummary: boolean;
+}
+
+export interface ReadingExplanation {
+  explanationVi: string;
+  simplifiedEnglish: string;
+  difficultWords: Array<{ word: string; meaningVi: string }>;
+  grammarNotes: string[];
+  fromCache: boolean;
+}
+
+export interface ReadingSummary {
+  english: string;
+  vietnamese: string;
+  fromCache: boolean;
+}
+
