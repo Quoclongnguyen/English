@@ -92,7 +92,7 @@ export interface Word {
   audioUrl?: string;
   topic: string;
   level: string;
-  source: 'daily' | 'camera';
+  source: 'daily' | 'camera' | 'listening';
   progress?: UserWordProgress;
 }
 
@@ -199,5 +199,47 @@ export interface PhotoDeckResponse {
     total: number;
     pages: number;
   };
+}
+
+// Listening
+
+export interface TranscriptWord {
+  id: string;
+  text: string;
+  normalizedText: string;
+  startMs: number;
+  endMs: number;
+  isSaveable: boolean;
+  phonetic?: string;
+  type?: string;
+  meaningVi?: string;
+  example?: string;
+}
+
+export interface TranscriptSegment {
+  id: string;
+  text: string;
+  translationVi?: string;
+  startMs: number;
+  endMs: number;
+  words: TranscriptWord[];
+}
+
+export interface ListeningLesson {
+  id: string;
+  title: string;
+  description?: string;
+  level: User['level'];
+  topic: string;
+  thumbnailUrl?: string;
+  durationMs: number;
+  audioUrl: string;
+  transcript: TranscriptSegment[];
+}
+
+export interface SaveListeningWordResponse {
+  word: Word;
+  progress: UserWordProgress;
+  alreadySaved: boolean;
 }
 

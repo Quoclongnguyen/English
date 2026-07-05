@@ -93,6 +93,8 @@ const HomeScreen = () => {
                 navigation.navigate('DailyVocabScreen');
               } else if (module.title === 'Camera') {
                 navigation.navigate('Tabs', { screen: 'Camera' });
+              } else if (module.title === 'Listening') {
+                navigation.navigate('ListeningPlayerScreen');
               } else if (module.title === 'Reading') { // Use Reading or something else for Review for now as a placeholder
                 navigation.navigate('ReviewQuizScreen');
               }
