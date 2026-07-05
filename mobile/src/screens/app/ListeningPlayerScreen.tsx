@@ -19,6 +19,7 @@ import { Typography } from '../../constants/typography';
 import { useListeningStore } from '../../stores/listeningStore';
 import { useThemeStore } from '../../stores/themeStore';
 import { TranscriptWord } from '../../types';
+import { resolveImageUrl } from '../../utils/imageUrl';
 
 const RATES = [0.75, 1, 1.25, 1.5];
 
@@ -32,7 +33,10 @@ const ListeningContent = () => {
     segmentId: string;
     word: TranscriptWord;
   } | null>(null);
-  const player = useAudioPlayer(lesson?.audioUrl ?? null, { updateInterval: 150 });
+  const player = useAudioPlayer(
+    lesson?.audioUrl ? resolveImageUrl(lesson.audioUrl) : null,
+    { updateInterval: 150 },
+  );
   const status = useAudioPlayerStatus(player);
   const rate = RATES[rateIndex];
 
