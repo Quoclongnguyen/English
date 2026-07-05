@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "seed:listening": "ts-node src/scripts/seedListening.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

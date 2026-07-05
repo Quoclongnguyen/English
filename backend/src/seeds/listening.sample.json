@@ -1,0 +1,232 @@
+{
+  "lesson": {
+    "title": "A Productive Morning",
+    "description": "Nghe một đoạn hội thoại ngắn về thói quen buổi sáng.",
+    "level": "A2",
+    "topic": "daily-routine",
+    "durationMs": 7600,
+    "status": "published"
+  },
+  "audioTrack": {
+    "audioUrl": "https://res.cloudinary.com/demo/video/upload/dog.mp3",
+    "source": "upload",
+    "provider": "cloudinary",
+    "durationMs": 7600,
+    "transcript": [
+      {
+        "id": "segment-1",
+        "text": "I usually wake up early and prepare a healthy breakfast.",
+        "translationVi": "Tôi thường thức dậy sớm và chuẩn bị một bữa sáng lành mạnh.",
+        "startMs": 0,
+        "endMs": 4200,
+        "words": [
+          {
+            "id": "word-1",
+            "text": "I",
+            "normalizedText": "i",
+            "startMs": 0,
+            "endMs": 250,
+            "isSaveable": false
+          },
+          {
+            "id": "word-2",
+            "text": "usually",
+            "normalizedText": "usually",
+            "startMs": 260,
+            "endMs": 900,
+            "isSaveable": true,
+            "phonetic": "/ˈjuːʒuəli/",
+            "type": "adverb",
+            "meaningVi": "thường xuyên",
+            "example": "I usually walk to work."
+          },
+          {
+            "id": "word-3",
+            "text": "wake",
+            "normalizedText": "wake",
+            "startMs": 910,
+            "endMs": 1250,
+            "isSaveable": true,
+            "phonetic": "/weɪk/",
+            "type": "verb",
+            "meaningVi": "thức dậy",
+            "example": "I wake up at six every day."
+          },
+          {
+            "id": "word-4",
+            "text": "up",
+            "normalizedText": "up",
+            "startMs": 1260,
+            "endMs": 1450,
+            "isSaveable": false
+          },
+          {
+            "id": "word-5",
+            "text": "early",
+            "normalizedText": "early",
+            "startMs": 1460,
+            "endMs": 1900,
+            "isSaveable": true,
+            "phonetic": "/ˈɜːrli/",
+            "type": "adverb",
+            "meaningVi": "sớm",
+            "example": "She arrived early."
+          },
+          {
+            "id": "word-6",
+            "text": "and",
+            "normalizedText": "and",
+            "startMs": 1910,
+            "endMs": 2150,
+            "isSaveable": false
+          },
+          {
+            "id": "word-7",
+            "text": "prepare",
+            "normalizedText": "prepare",
+            "startMs": 2160,
+            "endMs": 2750,
+            "isSaveable": true,
+            "phonetic": "/prɪˈper/",
+            "type": "verb",
+            "meaningVi": "chuẩn bị",
+            "example": "We prepare lunch together."
+          },
+          {
+            "id": "word-8",
+            "text": "a",
+            "normalizedText": "a",
+            "startMs": 2760,
+            "endMs": 2900,
+            "isSaveable": false
+          },
+          {
+            "id": "word-9",
+            "text": "healthy",
+            "normalizedText": "healthy",
+            "startMs": 2910,
+            "endMs": 3450,
+            "isSaveable": true,
+            "phonetic": "/ˈhelθi/",
+            "type": "adjective",
+            "meaningVi": "lành mạnh",
+            "example": "Fruit is a healthy snack."
+          },
+          {
+            "id": "word-10",
+            "text": "breakfast.",
+            "normalizedText": "breakfast",
+            "startMs": 3460,
+            "endMs": 4200,
+            "isSaveable": true,
+            "phonetic": "/ˈbrekfəst/",
+            "type": "noun",
+            "meaningVi": "bữa sáng",
+            "example": "Breakfast is ready."
+          }
+        ]
+      },
+      {
+        "id": "segment-2",
+        "text": "This routine helps me feel focused during the day.",
+        "translationVi": "Thói quen này giúp tôi cảm thấy tập trung suốt cả ngày.",
+        "startMs": 4300,
+        "endMs": 7600,
+        "words": [
+          {
+            "id": "word-11",
+            "text": "This",
+            "normalizedText": "this",
+            "startMs": 4300,
+            "endMs": 4550,
+            "isSaveable": false
+          },
+          {
+            "id": "word-12",
+            "text": "routine",
+            "normalizedText": "routine",
+            "startMs": 4560,
+            "endMs": 5100,
+            "isSaveable": true,
+            "phonetic": "/ruːˈtiːn/",
+            "type": "noun",
+            "meaningVi": "thói quen",
+            "example": "Exercise is part of my routine."
+          },
+          {
+            "id": "word-13",
+            "text": "helps",
+            "normalizedText": "help",
+            "startMs": 5110,
+            "endMs": 5450,
+            "isSaveable": true,
+            "phonetic": "/help/",
+            "type": "verb",
+            "meaningVi": "giúp đỡ",
+            "example": "Music helps me relax."
+          },
+          {
+            "id": "word-14",
+            "text": "me",
+            "normalizedText": "me",
+            "startMs": 5460,
+            "endMs": 5650,
+            "isSaveable": false
+          },
+          {
+            "id": "word-15",
+            "text": "feel",
+            "normalizedText": "feel",
+            "startMs": 5660,
+            "endMs": 5950,
+            "isSaveable": true,
+            "phonetic": "/fiːl/",
+            "type": "verb",
+            "meaningVi": "cảm thấy",
+            "example": "I feel happy today."
+          },
+          {
+            "id": "word-16",
+            "text": "focused",
+            "normalizedText": "focused",
+            "startMs": 5960,
+            "endMs": 6500,
+            "isSaveable": true,
+            "phonetic": "/ˈfoʊkəst/",
+            "type": "adjective",
+            "meaningVi": "tập trung",
+            "example": "She stayed focused on her work."
+          },
+          {
+            "id": "word-17",
+            "text": "during",
+            "normalizedText": "during",
+            "startMs": 6510,
+            "endMs": 6900,
+            "isSaveable": false
+          },
+          {
+            "id": "word-18",
+            "text": "the",
+            "normalizedText": "the",
+            "startMs": 6910,
+            "endMs": 7100,
+            "isSaveable": false
+          },
+          {
+            "id": "word-19",
+            "text": "day.",
+            "normalizedText": "day",
+            "startMs": 7110,
+            "endMs": 7600,
+            "isSaveable": true,
+            "phonetic": "/deɪ/",
+            "type": "noun",
+            "meaningVi": "ngày",
+            "example": "It was a busy day."
+          }
+        ]
+      }
+    ]
+  }
+}
