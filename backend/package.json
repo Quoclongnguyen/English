@@ -9,7 +9,8 @@
     "build": "tsc",
     "seed:listening": "ts-node src/scripts/seedListening.ts",
     "seed:reading": "ts-node src/scripts/seedReading.ts",
-    "generate:listening-audio": "ts-node src/scripts/generateListeningAudio.ts"
+    "generate:listening-audio": "ts-node src/scripts/generateListeningAudio.ts",
+    "seed:grammar": "ts-node src/scripts/seedGrammar.ts"
   },
   "dependencies": {
     "@google/genai": "^2.10.0",

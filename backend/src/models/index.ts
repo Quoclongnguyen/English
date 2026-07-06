@@ -6,4 +6,6 @@ export { AudioTrack } from './AudioTrack';
 export { Lesson } from './Lesson';
 export { ReadingPassage } from './ReadingPassage';
 export { ReadingExplanationCache } from './ReadingExplanationCache';
+export { GrammarTopic } from './GrammarTopic';
+export { GrammarExercise } from './GrammarExercise';
 
