@@ -29,6 +29,15 @@ export const getGrammarTopic = async (req: AuthRequest, res: Response) => {
   }
 };
 
+export const listGrammarTopics = async (_req: AuthRequest, res: Response) => {
+  try {
+    const topics = await grammarService.listPublishedTopics();
+    res.json({ topics });
+  } catch (error) {
+    handleError(error, res);
+  }
+};
+
 export const getGrammarExercises = async (req: AuthRequest, res: Response) => {
   try {
     const exercises = await grammarService.getPublishedExercises(

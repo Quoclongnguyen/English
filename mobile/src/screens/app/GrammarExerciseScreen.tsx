@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Button } from '../../components/Button';
 import { ExerciseQuestion } from '../../components/grammar/ExerciseQuestion';
 import { SAMPLE_GRAMMAR_TOPIC_ID } from '../../constants/config';
@@ -19,6 +19,7 @@ import { useThemeStore } from '../../stores/themeStore';
 
 const GrammarExerciseScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute<any>();
   const { colors } = useThemeStore();
   const {
     exercises,
@@ -30,10 +31,12 @@ const GrammarExerciseScreen = () => {
     submitAnswer,
   } = useGrammarStore();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const topicId = route.params?.topicId ?? SAMPLE_GRAMMAR_TOPIC_ID;
 
   useEffect(() => {
-    loadExercises(SAMPLE_GRAMMAR_TOPIC_ID).catch(() => undefined);
-  }, [loadExercises]);
+    setCurrentIndex(0);
+    loadExercises(topicId).catch(() => undefined);
+  }, [loadExercises, topicId]);
 
   const currentExercise = exercises[currentIndex];
   const currentResult = currentExercise ? answers[currentExercise.id] : undefined;
@@ -80,7 +83,7 @@ const GrammarExerciseScreen = () => {
           Không mở được bài tập
         </Text>
         <Text style={[styles.status, { color: colors.textMuted }]}>{error}</Text>
-        <TouchableOpacity onPress={() => loadExercises(SAMPLE_GRAMMAR_TOPIC_ID)}>
+        <TouchableOpacity onPress={() => loadExercises(topicId)}>
           <Text style={[styles.retry, { color: colors.accent }]}>Thử lại</Text>
         </TouchableOpacity>
       </View>

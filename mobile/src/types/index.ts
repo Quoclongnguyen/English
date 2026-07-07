@@ -317,6 +317,8 @@ export interface GrammarTopic {
   exerciseCount: number;
 }
 
+export type GrammarTopicSummary = Omit<GrammarTopic, 'theory'>;
+
 export type GrammarExerciseType = 'multiple_choice' | 'fill_blank';
 
 export interface GrammarOption {

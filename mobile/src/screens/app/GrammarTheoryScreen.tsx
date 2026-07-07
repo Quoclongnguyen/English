@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Button } from '../../components/Button';
 import { TheorySection } from '../../components/grammar/TheorySection';
 import { SAMPLE_GRAMMAR_TOPIC_ID } from '../../constants/config';
@@ -55,7 +55,7 @@ const GrammarTheoryContent = () => {
         <Button
           title="Làm bài tập"
           color="purple"
-          onPress={() => navigation.navigate('GrammarExerciseScreen')}
+          onPress={() => navigation.navigate('GrammarExerciseScreen', { topicId: topic.id })}
           style={styles.exerciseButton}
           icon={<Ionicons name="school-outline" size={20} color="#FFFFFF" />}
         />
@@ -65,13 +65,15 @@ const GrammarTheoryContent = () => {
 };
 
 const GrammarTheoryScreen = () => {
+  const route = useRoute<any>();
   const { colors } = useThemeStore();
   const { topic, isLoadingTopic, error, loadTopic, clear } = useGrammarStore();
+  const topicId = route.params?.topicId ?? SAMPLE_GRAMMAR_TOPIC_ID;
 
   useEffect(() => {
-    loadTopic(SAMPLE_GRAMMAR_TOPIC_ID).catch(() => undefined);
+    loadTopic(topicId).catch(() => undefined);
     return clear;
-  }, [clear, loadTopic]);
+  }, [clear, loadTopic, topicId]);
 
   if (isLoadingTopic) {
     return (
@@ -91,7 +93,7 @@ const GrammarTheoryScreen = () => {
           Không mở được bài ngữ pháp
         </Text>
         <Text style={[styles.status, { color: colors.textMuted }]}>{error}</Text>
-        <TouchableOpacity onPress={() => loadTopic(SAMPLE_GRAMMAR_TOPIC_ID)}>
+        <TouchableOpacity onPress={() => loadTopic(topicId)}>
           <Text style={[styles.retry, { color: colors.accent }]}>Thử lại</Text>
         </TouchableOpacity>
       </View>

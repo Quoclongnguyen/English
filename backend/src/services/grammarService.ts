@@ -6,6 +6,32 @@ const normalizeAnswer = (answer: string) =>
   answer.trim().toLowerCase().replace(/\s+/g, ' ');
 
 export class GrammarService {
+  async listPublishedTopics() {
+    const topics = await GrammarTopic.find({ status: 'published' })
+      .sort({ level: 1, category: 1, order: 1 })
+      .lean();
+
+    const topicIds = topics.map(topic => topic._id);
+    const counts = await GrammarExercise.aggregate([
+      { $match: { topicId: { $in: topicIds }, status: 'published' } },
+      { $group: { _id: '$topicId', exerciseCount: { $sum: 1 } } },
+    ]);
+    const countMap = new Map(
+      counts.map(item => [String(item._id), item.exerciseCount as number])
+    );
+
+    return topics.map(topic => ({
+      id: topic._id,
+      title: topic.title,
+      slug: topic.slug,
+      description: topic.description,
+      level: topic.level,
+      category: topic.category,
+      order: topic.order,
+      exerciseCount: countMap.get(String(topic._id)) ?? 0,
+    }));
+  }
+
   async getPublishedTopic(topicId: string) {
     if (!mongoose.isValidObjectId(topicId)) return null;
 

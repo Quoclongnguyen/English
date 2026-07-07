@@ -3,9 +3,15 @@ import {
   GrammarExercise,
   GrammarSubmitResponse,
   GrammarTopic,
+  GrammarTopicSummary,
 } from '../types';
 
 export const grammarService = {
+  listTopics: async (): Promise<GrammarTopicSummary[]> => {
+    const response = await api.get('/api/grammar/topics');
+    return response.data.topics;
+  },
+
   getTopic: async (topicId: string): Promise<GrammarTopic> => {
     const response = await api.get(`/api/grammar/topics/${topicId}`);
     return response.data.topic;
