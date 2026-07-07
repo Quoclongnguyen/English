@@ -3,6 +3,42 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Phase 4 Listening — Gemini TTS
+- ✅ **Backend**: Thêm `generate:listening-audio` dùng `gemini-2.5-flash-preview-tts` tạo PCM và đóng gói WAV.
+- ✅ **Backend**: Hỗ trợ upload audio lên Cloudinary khi có credentials; fallback sang `/public/uploads` khi chạy local.
+- ✅ **Backend**: Đồng bộ duration của Lesson/AudioTrack và scale timestamp transcript theo audio được generate.
+- ✅ **Mobile**: Resolve được cả Cloudinary URL và relative backend URL khi phát audio.
+- ✅ **Verification**: Generate audio English 9.611 giây; file WAV và Listening API trả dữ liệu thành công.
+
+### Phase 4 Reading (Backend)
+- ✅ **Backend**: Thêm `ReadingPassage` chứa các section EN/VI và summary được cache.
+- ✅ **Backend**: Thêm `ReadingExplanationCache` theo passage, section và user level.
+- ✅ **Backend**: Thêm API lấy passage, Gemini explain section và generate summary song ngữ.
+- ✅ **Backend**: Thêm `seed:reading` để tạo bài mẫu từ JSON.
+- ✅ **Verification**: Test API thật với MongoDB Atlas và Gemini; request sau trả explanation/summary từ cache.
+
+### Phase 4 Reading (Mobile)
+- ✅ **Mobile**: Thêm `ReadingScreen` mở bài mẫu trực tiếp từ Home.
+- ✅ **Mobile**: Hiển thị English mặc định và toggle bản dịch Việt dưới từng section.
+- ✅ **Mobile**: Nhấn giữ section để mở `ExplainModal` với giải thích, simplified English, từ khó và grammar notes.
+- ✅ **Mobile**: Thêm `SummaryModal` hiển thị summary EN/VI.
+- ✅ **Mobile**: Tách `readingService`, `readingStore` và các component theo feature.
+- ✅ **Verification**: TypeScript mobile pass.
+
+### Phase 4 Listening (Backend)
+- ✅ **Backend**: Thêm `Lesson` và `AudioTrack` với transcript theo segment/word timestamp.
+- ✅ **Backend**: Thêm API lấy bài Listening published và lưu từ transcript vào `Word`, `User.vocabulary`, `UserWordProgress`.
+- ✅ **Backend**: Tap-to-save idempotent, không tạo queue trùng và không reset tiến trình SM-2.
+- ✅ **Backend**: Thêm `seed:listening` để tạo bài mẫu.
+- ✅ **Verification**: Test API thật với MongoDB Atlas; lần lưu đầu `alreadySaved=false`, lần lặp `true`.
+
+### Phase 4 Listening (Mobile)
+- ✅ **Mobile**: Thêm Audio Player bằng `expo-audio`: play/pause, seek, tua ±10 giây và tốc độ 0.75x–1.5x.
+- ✅ **Mobile**: Thêm transcript EN/VI, highlight theo timestamp và đánh dấu từ đã lưu.
+- ✅ **Mobile**: Tap từ mở popup nghĩa; chỉ lưu vào Vocab Bank khi user xác nhận.
+- ✅ **Mobile**: Tách `listeningService`, `listeningStore` và các component theo feature.
+- ✅ **Verification**: TypeScript mobile pass.
+
 ### Phase 3 Photo Deck (Mobile)
 - ✅ **Mobile**: Thêm tab Photo Deck trong Vocab Bank với search debounce, sort và pagination.
 - ✅ **Mobile**: Thêm grid ảnh 2 cột và `PhotoDetailModal` hiển thị story cùng flashcard chạm để lật.
@@ -37,7 +73,7 @@
 ### Phase 2 Vocabulary Core (Backend)
 - ✅ **Backend**: Thêm model `Word` và `UserWordProgress` hỗ trợ thuật toán SM-2.
 - ✅ **Backend**: Viết logic `sm2Service.ts` tính toán `interval` và `easeFactor` chuẩn theo SM-2.
-- ✅ **Backend**: Tích hợp `geminiService.ts` sử dụng `@google/generative-ai` gọi Gemini 1.5 Pro sinh từ vựng.
+- ✅ **Backend**: Tích hợp `geminiService.ts` sử dụng `@google/generative-ai`; model hiện tại là Gemini 2.5 Flash.
 - ✅ **Backend**: Thêm `wordController.ts` và route `/api/words/daily`, `/api/words/bank`, `/api/words/review`, `/api/words/progress`.
 - ✅ **Verification**: `npx.cmd tsc --noEmit` pass trong thư mục `backend`.
 
@@ -117,7 +153,7 @@
 
 ## [2026-05-21] (Lần 2) - Bắt đầu Phase 1 Setup
 - ✅ **Mobile**: Khởi tạo project React Native Expo với `blank-typescript`.
-- ✅ **Mobile**: Cài đặt React Navigation, Zustand, Reanimated 3, AsyncStorage.
+- ✅ **Mobile**: Cài đặt React Navigation, Zustand, Reanimated và AsyncStorage (hiện dùng React Navigation 7, Reanimated 4).
 - ✅ **Mobile**: Khởi tạo cấu trúc thư mục `src` và thêm `constants/colors.ts`, `constants/typography.ts`.
 - ✅ **Backend**: Khởi tạo Node.js project với `package.json`, `tsconfig.json`.
 - ✅ **Backend**: Cài đặt Express, Mongoose, TypeScript, dotenv, bcrypt.

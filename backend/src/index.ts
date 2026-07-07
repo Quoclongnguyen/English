@@ -7,6 +7,8 @@ import authRouter from './routes/auth';
 import onboardingRouter from './routes/onboarding';
 import wordsRouter from './routes/words';
 import usersRouter from './routes/users';
+import listeningRouter from './routes/listening';
+import readingRouter from './routes/reading';
 import { startStreakFreezeJob } from './jobs/streakFreezeJob';
 
 const app = express();
@@ -28,6 +30,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/onboarding', onboardingRouter);
 app.use('/api/words', wordsRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/listening', listeningRouter);
+app.use('/api/reading', readingRouter);
 
 // 404 Handler
 app.use((_req, res) => {

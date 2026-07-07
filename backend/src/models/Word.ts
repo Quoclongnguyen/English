@@ -10,8 +10,9 @@ export interface IWord extends Document {
   audioUrl?: string;
   topic: string;
   level: string;
-  source: 'daily' | 'camera';
+  source: 'daily' | 'camera' | 'listening';
   photoRef?: string;
+  lessonRef?: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,8 +28,9 @@ const WordSchema = new Schema<IWord>(
     audioUrl: { type: String },
     topic: { type: String, required: true },
     level: { type: String, required: true },
-    source: { type: String, enum: ['daily', 'camera'], default: 'daily' },
+    source: { type: String, enum: ['daily', 'camera', 'listening'], default: 'daily' },
     photoRef: { type: String },
+    lessonRef: { type: Schema.Types.ObjectId, ref: 'Lesson' },
   },
   { timestamps: true }
 );
