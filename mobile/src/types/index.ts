@@ -278,3 +278,73 @@ export interface ReadingSummary {
   fromCache: boolean;
 }
 
+// Grammar
+
+export interface GrammarExample {
+  english: string;
+  vietnamese: string;
+}
+
+export interface GrammarUsage {
+  id: string;
+  title: string;
+  explanation: string;
+  examples: GrammarExample[];
+}
+
+export interface GrammarStructure {
+  id: string;
+  label: 'affirmative' | 'negative' | 'question' | 'other';
+  formula: string;
+  explanation?: string;
+  examples: GrammarExample[];
+}
+
+export interface GrammarTopic {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  level: User['level'];
+  category: 'tense' | 'modal' | 'conditional' | 'comparison' | 'other';
+  order: number;
+  theory: {
+    overview: string;
+    usages: GrammarUsage[];
+    structures: GrammarStructure[];
+    notes: string[];
+  };
+  exerciseCount: number;
+}
+
+export type GrammarExerciseType = 'multiple_choice' | 'fill_blank';
+
+export interface GrammarOption {
+  id: string;
+  text: string;
+}
+
+export interface GrammarExercise {
+  id: string;
+  topicId: string;
+  type: GrammarExerciseType;
+  order: number;
+  level: User['level'];
+  question: string;
+  sentence?: string;
+  options?: GrammarOption[];
+}
+
+export interface GrammarSubmitResponse {
+  exerciseId: string;
+  isCorrect: boolean;
+  submittedAnswer: string;
+  correctAnswer: string;
+  correctAnswerText: string;
+  explanation: {
+    rule: string;
+    correctReason: string;
+    mistakeReason?: string;
+  };
+}
+
