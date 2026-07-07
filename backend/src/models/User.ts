@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, Types } from 'mongoose';
 
 export interface IUserVocab {
   word: string;
-  source: 'photo' | 'review';
+  source: 'photo' | 'review' | 'listening';
   photoScanId?: Types.ObjectId;
   learnedAt: Date;
   mastered: boolean;
@@ -66,7 +66,7 @@ export interface IUser extends Document {
 
 const UserVocabSchema = new Schema({
   word: { type: String, required: true, lowercase: true, trim: true },
-  source: { type: String, enum: ['photo', 'review'], default: 'review' },
+  source: { type: String, enum: ['photo', 'review', 'listening'], default: 'review' },
   photoScanId: { type: Schema.Types.ObjectId, ref: 'PhotoScan', sparse: true },
   learnedAt: { type: Date, default: Date.now },
   mastered: { type: Boolean, default: false },

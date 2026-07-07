@@ -92,7 +92,7 @@ export interface Word {
   audioUrl?: string;
   topic: string;
   level: string;
-  source: 'daily' | 'camera';
+  source: 'daily' | 'camera' | 'listening';
   progress?: UserWordProgress;
 }
 
@@ -198,6 +198,153 @@ export interface PhotoDeckResponse {
     limit: number;
     total: number;
     pages: number;
+  };
+}
+
+// Listening
+
+export interface TranscriptWord {
+  id: string;
+  text: string;
+  normalizedText: string;
+  startMs: number;
+  endMs: number;
+  isSaveable: boolean;
+  phonetic?: string;
+  type?: string;
+  meaningVi?: string;
+  example?: string;
+}
+
+export interface TranscriptSegment {
+  id: string;
+  text: string;
+  translationVi?: string;
+  startMs: number;
+  endMs: number;
+  words: TranscriptWord[];
+}
+
+export interface ListeningLesson {
+  id: string;
+  title: string;
+  description?: string;
+  level: User['level'];
+  topic: string;
+  thumbnailUrl?: string;
+  durationMs: number;
+  audioUrl: string;
+  transcript: TranscriptSegment[];
+}
+
+export interface SaveListeningWordResponse {
+  word: Word;
+  progress: UserWordProgress;
+  alreadySaved: boolean;
+}
+
+// Reading
+
+export interface ReadingSection {
+  id: string;
+  order: number;
+  english: string;
+  vietnamese: string;
+}
+
+export interface ReadingPassage {
+  id: string;
+  title: string;
+  description?: string;
+  level: User['level'];
+  topic: string;
+  thumbnailUrl?: string;
+  estimatedReadingMinutes: number;
+  sections: ReadingSection[];
+  hasSummary: boolean;
+}
+
+export interface ReadingExplanation {
+  explanationVi: string;
+  simplifiedEnglish: string;
+  difficultWords: Array<{ word: string; meaningVi: string }>;
+  grammarNotes: string[];
+  fromCache: boolean;
+}
+
+export interface ReadingSummary {
+  english: string;
+  vietnamese: string;
+  fromCache: boolean;
+}
+
+// Grammar
+
+export interface GrammarExample {
+  english: string;
+  vietnamese: string;
+}
+
+export interface GrammarUsage {
+  id: string;
+  title: string;
+  explanation: string;
+  examples: GrammarExample[];
+}
+
+export interface GrammarStructure {
+  id: string;
+  label: 'affirmative' | 'negative' | 'question' | 'other';
+  formula: string;
+  explanation?: string;
+  examples: GrammarExample[];
+}
+
+export interface GrammarTopic {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  level: User['level'];
+  category: 'tense' | 'modal' | 'conditional' | 'comparison' | 'other';
+  order: number;
+  theory: {
+    overview: string;
+    usages: GrammarUsage[];
+    structures: GrammarStructure[];
+    notes: string[];
+  };
+  exerciseCount: number;
+}
+
+export type GrammarExerciseType = 'multiple_choice' | 'fill_blank';
+
+export interface GrammarOption {
+  id: string;
+  text: string;
+}
+
+export interface GrammarExercise {
+  id: string;
+  topicId: string;
+  type: GrammarExerciseType;
+  order: number;
+  level: User['level'];
+  question: string;
+  sentence?: string;
+  options?: GrammarOption[];
+}
+
+export interface GrammarSubmitResponse {
+  exerciseId: string;
+  isCorrect: boolean;
+  submittedAnswer: string;
+  correctAnswer: string;
+  correctAnswerText: string;
+  explanation: {
+    rule: string;
+    correctReason: string;
+    mistakeReason?: string;
   };
 }
 

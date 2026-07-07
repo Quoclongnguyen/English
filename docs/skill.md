@@ -2,8 +2,8 @@
 
 > **Mục tiêu:** Ứng dụng học tiếng Anh toàn diện trên mobile (iOS & Android)
 > **Tech Stack:** React Native (Expo) · TypeScript · Node.js · MongoDB
-> **Trạng thái dự án:** 🟡 Phase 1 đang thực hiện
-> **Cập nhật lần cuối:** 2026-06-03
+> **Trạng thái dự án:** 🟡 Phase 4 đang thực hiện — Listening & Reading MVP hoàn thành
+> **Cập nhật lần cuối:** 2026-07-07
 
 ---
 
@@ -27,12 +27,12 @@ File này dùng để AI theo dõi toàn bộ dự án.
 ### Mobile (Frontend)
 - **Framework:** React Native + Expo SDK
 - **Language:** TypeScript
-- **Navigation:** React Navigation v6
+- **Navigation:** React Navigation v7
 - **State Management:** Zustand
-- **Animations:** React Native Reanimated 3
-- **Audio (TTS + playback):** Expo AV + Expo Speech
+- **Animations:** React Native Reanimated 4
+- **Audio (TTS + playback):** Expo Audio + Expo Speech
 - **Camera:** Expo Camera + Expo Image Picker
-- **Notifications:** Expo Notifications
+- **Notifications:** Chưa triển khai
 - **Storage (local):** AsyncStorage
 
 ### Backend
@@ -40,8 +40,8 @@ File này dùng để AI theo dõi toàn bộ dự án.
 - **Language:** TypeScript
 - **Database:** MongoDB + Mongoose
 - **Auth:** JWT + Refresh Token + Google OAuth + Apple Sign In
-- **Cloud Storage:** Cloudinary (audio, images)
-- **AI:** Gemini API (Google) — sinh từ vựng, story, Vision, giải thích
+- **Cloud Storage:** Cloudinary (ưu tiên) + local `/uploads` fallback
+- **AI:** Gemini API — từ vựng, story, Vision, Reading Explain/Summary, Listening TTS
 
 ### DevOps / Tools
 - **IDE:** Google Antigravity
@@ -128,7 +128,7 @@ English/
 
 #### 1.1 Setup Project
 - ✅ `npx create-expo-app mobile --template expo-template-blank-typescript`
-- ✅ Cài dependencies: React Navigation, Zustand, Reanimated 3, AsyncStorage
+- ✅ Cài dependencies: React Navigation, Zustand, Reanimated 4, AsyncStorage
 - ✅ Cấu hình ESLint + Prettier
 - ✅ Setup folder structure theo cây thư mục ở trên
 
@@ -184,7 +184,8 @@ English/
 - ✅ SM-2 algorithm
 - ✅ Review Quiz (3 dạng + giải thích sai/đúng)
 - ✅ Vocab Bank + status labels
-- ✅ Streak + XP + Notifications
+- ✅ Streak + XP
+- 🔲 Push Notifications
 
 ### Phase 3 — Differentiator (Tháng 3)
 - ✅ Camera Vocabulary (Gemini Vision + checklist)
@@ -194,8 +195,8 @@ English/
 - ✅ Profile + Progress screens
 
 ### Phase 4 — Content (Tháng 4–5)
-- 🔲 Listening module (player + transcript + tap-to-save)
-- 🔲 Reading module (song ngữ + AI explain + summary)
+- ✅ Listening MVP (player + transcript + tap-to-save + Gemini TTS)
+- ✅ Reading MVP (song ngữ + AI explain + summary)
 - 🔲 Grammar module (theory + exercise + giải thích sai)
 - 🔲 Beta test với real users
 
@@ -216,12 +217,34 @@ English/
 | 2026-05-21 | Khi quiz sai: BẮT BUỘC giải thích tại sao sai + đáp án đúng |
 | 2026-05-21 | Camera vocab dùng checklist filter — không auto-save |
 | 2026-05-21 | Design: Bold & Playful, Dark + Light mode |
+| 2026-07-05 | Listening MVP mở thẳng một bài seed; chưa làm lesson list/CMS |
+| 2026-07-05 | Reading mobile dùng English mặc định, toggle VI dưới từng section |
+| 2026-07-05 | Reading explain cache theo passage + section + user level |
+| 2026-07-06 | Listening audio tạo trước bằng Gemini TTS; mobile phát URL đã lưu |
+| 2026-07-06 | Thiếu Cloudinary credentials thì backend phục vụ audio từ `/uploads` |
 
 ---
 
 ## 🐛 Known Issues
 
-*(Chưa có — dự án chưa bắt đầu code)*
+- Listening và Reading hiện dùng ID bài seed cố định, chưa có màn danh sách nội dung.
+- Reading chưa hỗ trợ tap-to-save từ.
+- Review Quiz mới có Multiple Choice; chưa có Fill-in-blank và Listen & Type.
+- Push Notifications, Grammar, Beta infrastructure và Admin Dashboard chưa triển khai.
+- Timestamp Gemini TTS hiện scale theo tổng duration, chưa phải forced alignment chính xác từng từ.
+
+---
+
+## 🧠 Lessons Learned
+
+- Không dùng media demo làm content thực tế; audio phải khớp transcript trước khi test UI.
+- Gemini TTS trả PCM; backend cần đóng gói WAV trước khi lưu hoặc upload.
+- Gemini TTS không trả word-level timestamp. Scale theo duration chỉ phù hợp MVP; production nên dùng forced alignment.
+- Mobile media URL phải hỗ trợ cả absolute Cloudinary URL và relative backend `/uploads` URL.
+- Tap-to-save phải idempotent và không reset tiến trình SM-2 của từ đã tồn tại.
+- Vocab Bank hiện được hợp nhất từ `Word`, `User.vocabulary` và `UserWordProgress`; luồng save phải đồng bộ cả ba.
+- Reading explanation nên cache theo passage, section và level; summary nên generate một lần rồi lưu.
+- Seed JSON phù hợp cho MVP content; khi số bài tăng cần lesson list và Admin CMS.
 
 ---
 

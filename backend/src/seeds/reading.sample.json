@@ -1,0 +1,28 @@
+{
+  "title": "Small Habits, Lasting Change",
+  "description": "Khám phá cách những thói quen nhỏ có thể tạo nên thay đổi lâu dài.",
+  "level": "A2",
+  "topic": "personal-growth",
+  "estimatedReadingMinutes": 3,
+  "status": "published",
+  "sections": [
+    {
+      "id": "section-1",
+      "order": 1,
+      "english": "Many people try to change their lives by making big plans. They may decide to exercise every day, read many books, or learn a new language very quickly. These goals are exciting, but they can also feel difficult after a few days.",
+      "vietnamese": "Nhiều người cố gắng thay đổi cuộc sống bằng cách lập những kế hoạch lớn. Họ có thể quyết định tập thể dục mỗi ngày, đọc nhiều sách hoặc học một ngôn ngữ mới thật nhanh. Những mục tiêu này rất thú vị, nhưng chúng cũng có thể trở nên khó khăn chỉ sau vài ngày."
+    },
+    {
+      "id": "section-2",
+      "order": 2,
+      "english": "A smaller habit is often easier to continue. For example, a person can begin with a five-minute walk or learn three English words each morning. The action seems simple, so there is less pressure to avoid it.",
+      "vietnamese": "Một thói quen nhỏ thường dễ duy trì hơn. Ví dụ, một người có thể bắt đầu bằng việc đi bộ năm phút hoặc học ba từ tiếng Anh mỗi sáng. Hành động có vẻ đơn giản nên chúng ta ít cảm thấy áp lực phải né tránh nó."
+    },
+    {
+      "id": "section-3",
+      "order": 3,
+      "english": "Over time, repeated actions become part of a routine. The important thing is not to be perfect, but to return to the habit when you miss a day. Small steps can slowly build confidence and create lasting change.",
+      "vietnamese": "Theo thời gian, những hành động lặp lại trở thành một phần của thói quen. Điều quan trọng không phải là hoàn hảo, mà là quay lại với thói quen khi bạn bỏ lỡ một ngày. Những bước nhỏ có thể từ từ xây dựng sự tự tin và tạo ra thay đổi lâu dài."
+    }
+  ]
+}

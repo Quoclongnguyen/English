@@ -7,45 +7,45 @@ Tài liệu này chứa toàn bộ các tính năng, danh sách màn hình, mô 
 ### 🔐 Auth
 - 🔲 Đăng nhập Google (OAuth)
 - 🔲 Đăng nhập Apple (Sign In with Apple)
-- 🔲 Đăng nhập Email + Password
-- 🔲 JWT + Refresh Token
-- 🔲 Persistent session (không phải đăng nhập lại)
+- ✅ Đăng nhập Email + Password
+- ✅ JWT + Refresh Token
+- ✅ Persistent session (không phải đăng nhập lại)
 
 ### 📱 Onboarding (chạy 1 lần)
-- 🔲 Chọn mục tiêu: IELTS / TOEIC / Business / Giao tiếp
-- 🔲 Chọn daily target: 5 / 7 / 10 từ/ngày
-- 🔲 Placement Test 5 câu → xác định trình độ A1→B2. Format: 5 câu Multiple Choice, khó dần.
-- 🔲 Kết quả trình độ + lộ trình cá nhân hóa.
+- ✅ Chọn mục tiêu: IELTS / TOEIC / Business / Giao tiếp
+- ✅ Chọn daily target: 5 / 7 / 10 từ/ngày
+- ✅ Placement Test 5 câu → xác định trình độ A1→B2. Format: 5 câu Multiple Choice, khó dần.
+- ✅ Kết quả trình độ + lộ trình cá nhân hóa cơ bản.
 
 ### 📚 Vocabulary
-- 🔲 Daily vocab: Gemini sinh 5/7/10 từ theo level + goal + mini-story
-- 🔲 Flashcard lật 3D + phát âm TTS
-- 🔲 Đánh giá: "Biết rồi ✓" / "Cần ôn 🔁"
-- 🔲 Vocab Bank + Filter & Search
+- ✅ Daily vocab: Gemini sinh 5/7/10 từ theo level + goal + mini-story
+- ✅ Flashcard lật 3D + phát âm TTS
+- ✅ Đánh giá: "Biết rồi ✓" / "Cần ôn 🔁"
+- 🔄 Vocab Bank đã có; Filter & Search cho danh sách từ chính chưa hoàn chỉnh
 
 ### 🔁 Smart Review
-- 🔲 SM-2 Spaced Repetition algorithm
-- 🔲 3 dạng Quiz: Multiple Choice, Fill-in-blank, Listen & Type
-- 🔲 **Luôn giải thích khi chọn sai**
-- 🔲 XP reward
+- ✅ SM-2 Spaced Repetition algorithm
+- 🔄 Quiz: Multiple Choice đã có; Fill-in-blank và Listen & Type chưa có
+- ✅ **Luôn giải thích khi chọn sai** (giải thích tĩnh trong Review Quiz)
+- ✅ XP reward
 
 ### 📷 Camera Vocabulary
-- 🔲 Chụp/Chọn ảnh → Gemini Vision phân tích
-- 🔲 Trả về list từ → User dùng checklist để chọn từ muốn lưu (không auto-save)
-- 🔲 Mini-story sinh ra từ bối cảnh bức ảnh
-- 🔲 Photo Deck trong Vocab Bank
+- ✅ Chụp/Chọn ảnh → Gemini Vision phân tích
+- ✅ Trả về list từ → User dùng checklist để chọn từ muốn lưu (không auto-save)
+- ✅ Mini-story sinh ra từ bối cảnh bức ảnh
+- ✅ Photo Deck trong Vocab Bank
 
 ### 🎧 Listening & 📰 Reading & 📝 Grammar
-- 🔲 Listening: Audio player, speed control, transcript EN/VI ẩn hiện.
-- 🔲 Reading: Bài đọc song ngữ, AI giải thích câu khó, tóm tắt bài.
+- ✅ Listening MVP: Audio player, speed control, transcript EN/VI ẩn hiện.
+- ✅ Reading MVP: Bài đọc song ngữ, AI giải thích section, tóm tắt bài.
 - 🔲 Grammar: Bài giảng lý thuyết, bài tập (kèm giải thích khi sai).
-- 🔲 Tap từ khó trong bài nghe/đọc → Xem nghĩa & lưu vào Vocab Bank.
+- 🔄 Tap từ khó → Listening đã có xem nghĩa + lưu; Reading chưa có.
 
 ### 🎮 Gamification & 🔔 Notifications
-- 🔲 Streak đếm ngày + Streak Freeze
-- 🔲 XP points & Level System
-- 🔲 Milestone Badges
-- 🔲 Daily Goal Ring (vòng tiến độ)
+- ✅ Streak đếm ngày + Streak Freeze
+- 🔄 XP points đã có; Level progression chưa hoàn chỉnh
+- ✅ Milestone Badges
+- ✅ Daily Goal Ring (vòng tiến độ)
 - 🔲 Push Notification: Word of the Day, Review Reminder, Streak Alert
 
 ---
@@ -61,13 +61,13 @@ Tài liệu này chứa toàn bộ các tính năng, danh sách màn hình, mô 
 - 🏠 `HomeScreen` (Dashboard, streak, modules)
 - 📖 `VocabBankScreen` (Danh sách từ đã học)
 - 📷 `CameraScreen` (Scan ảnh)
-- 📝 `LearnHubScreen` (Nghe / Đọc / Ngữ pháp)
+- 📝 Home hiện đóng vai trò Learn Hub; chưa có `LearnHubScreen` riêng
 - 👤 `ProfileScreen` (Thống kê, badges)
 
 ### Flows
-- **Vocabulary:** `DailyVocabScreen`, `FlashcardScreen`, `ReviewQuizScreen`, `QuizExplanationScreen`.
+- **Vocabulary:** `DailyVocabScreen`, `FlashcardScreen`, `ReviewQuizScreen` (explanation hiển thị cùng màn).
 - **Camera:** `CameraChecklistScreen`.
-- **Learn:** `ListeningPlayerScreen`, `ReadingArticleScreen`, `GrammarLessonScreen`, `GrammarExerciseScreen`.
+- **Learn:** `ListeningPlayerScreen`, `ReadingScreen`; Grammar screens chưa triển khai.
 
 ---
 
@@ -90,7 +90,8 @@ Tài liệu này chứa toàn bộ các tính năng, danh sách màn hình, mô 
   _id: ObjectId, word: string, phonetic: string, type: string,
   meaning_vi: string, example: string, story?: string,
   audioUrl?: string, topic: string, level: string,
-  source: 'daily'|'camera', photoRef?: string, createdAt: Date
+  source: 'daily'|'camera'|'listening', photoRef?: string,
+  lessonRef?: ObjectId, createdAt: Date
 }
 ```
 
@@ -98,14 +99,25 @@ Tài liệu này chứa toàn bộ các tính năng, danh sách màn hình, mô 
 ```typescript
 {
   _id: ObjectId, userId: ObjectId, wordId: ObjectId,
-  status: 'learning'|'reviewing'|'mastered',
+  status: 'new'|'learning'|'reviewing'|'mastered',
   nextReviewDate: Date, reviewCount: number, easeFactor: number,
   interval: number, lastResult: 'correct'|'wrong'
 }
 ```
 
-### Lesson & GrammarTopic
-Lưu trữ thông tin bài Nghe, Đọc, Ngữ pháp kèm nội dung text/audio và câu hỏi (cùng lời giải thích).
+### Lesson & AudioTrack
+`Lesson` lưu metadata bài Listening. `AudioTrack` lưu URL audio, nguồn
+`upload|gemini_tts|third_party`, transcript EN/VI và timestamp theo segment/word.
+
+### ReadingPassage & ReadingExplanationCache
+`ReadingPassage` lưu các section EN/VI và summary. Explanation từ Gemini được cache
+theo passage, section và trình độ người học.
+
+### PhotoScan
+Lưu ảnh Camera Vocabulary, mini-story, detected words, saved words và XP.
+
+### GrammarTopic
+Chưa triển khai.
 
 ### Badge
 Ghi nhận huy hiệu user đạt được (`streak_7`, `words_100`...).

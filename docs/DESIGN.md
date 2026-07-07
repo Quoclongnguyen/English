@@ -21,7 +21,7 @@
 | **Blue** | `#3B82F6` | `rgba(59,130,246, 0.12)` | `rgba(59,130,246, 0.25)` | Listening Hub, player, Audio actions. |
 | **Yellow** | `#FBBF24` | `rgba(251,191,36, 0.12)` | `rgba(251,191,36, 0.25)` | Điểm XP, Highlights trong văn bản, trạng thái "Learning". |
 | **Pink** | `#F472B6` | `rgba(244,114,182, 0.12)`| `rgba(244,114,182, 0.25)`| Hiển thị Badges (Thành tựu). |
-| **Teal** | `#14B8A6` | `rgba(20,184,166, 0.12)` | `rgba(20,184,166, 0.25)` | Reading Module, Tóm tắt AI. |
+| **Teal** | `#14B8A6` | `rgba(20,184,166, 0.12)` | `rgba(20,184,166, 0.25)` | Reading Module, Tóm tắt AI (định hướng; MVP hiện dùng Green primary). |
 
 ### 3.2. Background & Surface Colors
 *Chú ý: Ứng dụng tập trung thiết kế nổi bật (elevated surfaces) với viền nhẹ.*
@@ -63,6 +63,27 @@
 3. **Pill Tags:** Text cực nhỏ (`10px`), font `Space Mono`, chữ hoa (Uppercase), khoảng cách chữ (letter-spacing `0.08em` tới `0.1em`). Thường dùng làm nhãn level, trạng thái.
 4. **Flashcard 3D:** Hiệu ứng xoay mặt trước (cfront) và mặt sau (cback) dọc trục Y (`rotateY(180deg)`), sử dụng `backface-visibility: hidden`.
 5. **Tiến trình (Progress Bar):** Rất hay dùng gradient. Ví dụ: `linear-gradient(90deg, #00D68F, #52FFB8)`.
+
+### 5.1 Kiến Trúc UI Hiện Tại
+
+- `MainNavigator` là Native Stack bao ngoài `AppNavigator` (Bottom Tabs).
+- Bottom Tabs hiện có: Home, Vocab Bank, Camera và Profile.
+- Các flow Daily Vocab, Review, Camera Checklist, Listening và Reading được mở từ Stack.
+- Home đóng vai trò Learn Hub; chưa có `LearnHubScreen` riêng.
+- State dùng Zustand theo feature: auth, onboarding, vocab, user, listening và reading.
+- API calls được tách trong `services/`; types dùng chung trong `src/types`.
+- Listening playback dùng `expo-audio`; flashcard/review phát âm từ dùng `expo-speech`.
+- Listening và Reading MVP hiện mở trực tiếp một bài seed mẫu; chưa có màn danh sách content.
+- UI dùng StyleSheet và theme tokens. Gradient/Glassmorphism trong tài liệu là định hướng, chưa áp dụng đồng đều trong code.
+
+### 5.2 Kiến Trúc Content & AI
+
+- Backend theo layer `route → controller → service → model`.
+- Listening dùng `Lesson` + `AudioTrack`; transcript có timestamp theo segment và word.
+- Reading dùng `ReadingPassage`; Gemini explanation được cache riêng theo section và level.
+- Reading summary được generate một lần rồi lưu lại trong passage.
+- Gemini TTS tạo WAV cho Listening; Cloudinary là storage ưu tiên, `/uploads` là fallback local.
+- Content MVP được seed từ JSON bằng scripts, chưa có Admin CMS.
 
 ---
 

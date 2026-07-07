@@ -40,7 +40,8 @@
         {
           "photosPermission": "LEXIS cần truy cập thư viện để chọn ảnh học từ vựng."
         }
-      ]
+      ],
+      "expo-audio"
     ]
   }
 }

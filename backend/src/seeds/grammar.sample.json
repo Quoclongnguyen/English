@@ -1,0 +1,204 @@
+{
+  "topic": {
+    "title": "Present Simple",
+    "slug": "present-simple",
+    "description": "Diễn tả thói quen, sự thật và những điều xảy ra thường xuyên.",
+    "level": "A1",
+    "category": "tense",
+    "order": 1,
+    "status": "published",
+    "theory": {
+      "overview": "Thì hiện tại đơn dùng để nói về thói quen, sự thật hiển nhiên và lịch trình cố định.",
+      "usages": [
+        {
+          "id": "usage-habit",
+          "title": "Thói quen và hành động lặp lại",
+          "explanation": "Dùng cho việc xảy ra thường xuyên, thường đi cùng always, usually, often, sometimes hoặc every day.",
+          "examples": [
+            {
+              "english": "I study English every evening.",
+              "vietnamese": "Tôi học tiếng Anh mỗi tối."
+            }
+          ]
+        },
+        {
+          "id": "usage-fact",
+          "title": "Sự thật hiển nhiên",
+          "explanation": "Dùng cho sự thật hoặc điều nhìn chung luôn đúng.",
+          "examples": [
+            {
+              "english": "Water boils at 100°C.",
+              "vietnamese": "Nước sôi ở 100°C."
+            }
+          ]
+        },
+        {
+          "id": "usage-schedule",
+          "title": "Lịch trình cố định",
+          "explanation": "Dùng cho thời gian biểu, lịch học hoặc lịch phương tiện.",
+          "examples": [
+            {
+              "english": "The train leaves at eight.",
+              "vietnamese": "Tàu rời ga lúc tám giờ."
+            }
+          ]
+        }
+      ],
+      "structures": [
+        {
+          "id": "structure-affirmative",
+          "label": "affirmative",
+          "formula": "S + V(s/es) + ...",
+          "explanation": "Thêm s/es vào động từ khi chủ ngữ là he, she hoặc it.",
+          "examples": [
+            {
+              "english": "She works in a bank.",
+              "vietnamese": "Cô ấy làm việc ở ngân hàng."
+            }
+          ]
+        },
+        {
+          "id": "structure-negative",
+          "label": "negative",
+          "formula": "S + do/does not + V + ...",
+          "explanation": "Sau don't/doesn't, động từ trở về nguyên mẫu.",
+          "examples": [
+            {
+              "english": "He doesn't drink coffee.",
+              "vietnamese": "Anh ấy không uống cà phê."
+            }
+          ]
+        },
+        {
+          "id": "structure-question",
+          "label": "question",
+          "formula": "Do/Does + S + V + ...?",
+          "explanation": "Dùng Does cho he, she, it; dùng Do cho các chủ ngữ còn lại.",
+          "examples": [
+            {
+              "english": "Do they live here?",
+              "vietnamese": "Họ sống ở đây phải không?"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Động từ tận cùng bằng -s, -sh, -ch, -x hoặc -o thường thêm -es.",
+        "Động từ tận cùng bằng phụ âm + y đổi y thành i rồi thêm -es.",
+        "Trạng từ tần suất thường đứng trước động từ thường nhưng đứng sau động từ to be."
+      ]
+    }
+  },
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "order": 1,
+      "level": "A1",
+      "question": "Choose the correct answer.",
+      "sentence": "She ___ to school every day.",
+      "options": [
+        { "id": "a", "text": "go" },
+        { "id": "b", "text": "goes" },
+        { "id": "c", "text": "going" }
+      ],
+      "correctAnswer": "b",
+      "acceptedAnswers": [],
+      "explanation": {
+        "rule": "Với chủ ngữ she ở hiện tại đơn, động từ thường thêm -s hoặc -es.",
+        "correctReason": "Go tận cùng bằng -o nên đổi thành goes.",
+        "commonMistakes": ["Dùng động từ nguyên mẫu go sau she.", "Dùng V-ing khi câu không có động từ to be."]
+      },
+      "status": "published"
+    },
+    {
+      "type": "multiple_choice",
+      "order": 2,
+      "level": "A1",
+      "question": "Choose the correct negative form.",
+      "sentence": "He ___ coffee.",
+      "options": [
+        { "id": "a", "text": "don't drink" },
+        { "id": "b", "text": "doesn't drinks" },
+        { "id": "c", "text": "doesn't drink" }
+      ],
+      "correctAnswer": "c",
+      "acceptedAnswers": [],
+      "explanation": {
+        "rule": "He dùng doesn't; sau doesn't là động từ nguyên mẫu.",
+        "correctReason": "Doesn't drink có đúng trợ động từ và động từ nguyên mẫu.",
+        "commonMistakes": ["Dùng don't với he.", "Thêm -s vào động từ sau doesn't."]
+      },
+      "status": "published"
+    },
+    {
+      "type": "multiple_choice",
+      "order": 3,
+      "level": "A1",
+      "question": "Choose the correct question.",
+      "sentence": "___ your parents work on Saturdays?",
+      "options": [
+        { "id": "a", "text": "Do" },
+        { "id": "b", "text": "Does" },
+        { "id": "c", "text": "Are" }
+      ],
+      "correctAnswer": "a",
+      "acceptedAnswers": [],
+      "explanation": {
+        "rule": "Chủ ngữ số nhiều dùng Do để tạo câu hỏi hiện tại đơn.",
+        "correctReason": "Your parents là số nhiều nên dùng Do.",
+        "commonMistakes": ["Dùng Does cho chủ ngữ số nhiều.", "Dùng Are trước động từ thường work."]
+      },
+      "status": "published"
+    },
+    {
+      "type": "multiple_choice",
+      "order": 4,
+      "level": "A1",
+      "question": "Choose the best frequency adverb.",
+      "sentence": "I ___ brush my teeth before bed.",
+      "options": [
+        { "id": "a", "text": "always" },
+        { "id": "b", "text": "yesterday" },
+        { "id": "c", "text": "now" }
+      ],
+      "correctAnswer": "a",
+      "acceptedAnswers": [],
+      "explanation": {
+        "rule": "Hiện tại đơn thường đi với trạng từ chỉ tần suất.",
+        "correctReason": "Always diễn tả một thói quen lặp lại.",
+        "commonMistakes": ["Yesterday thường dùng với quá khứ.", "Now thường mô tả hành động đang xảy ra."]
+      },
+      "status": "published"
+    },
+    {
+      "type": "fill_blank",
+      "order": 5,
+      "level": "A1",
+      "question": "Fill in the blank with the correct verb form.",
+      "sentence": "They ___ football on Sundays. (play)",
+      "correctAnswer": "play",
+      "acceptedAnswers": ["play"],
+      "explanation": {
+        "rule": "Chủ ngữ they dùng động từ nguyên mẫu trong câu khẳng định hiện tại đơn.",
+        "correctReason": "Đáp án đúng là play, không thêm -s.",
+        "commonMistakes": ["Thêm -s sau chủ ngữ số nhiều they."]
+      },
+      "status": "published"
+    },
+    {
+      "type": "fill_blank",
+      "order": 6,
+      "level": "A1",
+      "question": "Fill in the blank with the correct negative form.",
+      "sentence": "Anna ___ like cold weather. (not)",
+      "correctAnswer": "doesn't",
+      "acceptedAnswers": ["doesn't", "does not"],
+      "explanation": {
+        "rule": "Chủ ngữ ngôi thứ ba số ít dùng does not hoặc doesn't.",
+        "correctReason": "Anna là ngôi thứ ba số ít nên dùng doesn't.",
+        "commonMistakes": ["Dùng don't với Anna."]
+      },
+      "status": "published"
+    }
+  ]
+}
