@@ -97,6 +97,8 @@ const HomeScreen = () => {
                 navigation.navigate('ListeningPlayerScreen');
               } else if (module.title === 'Reading') {
                 navigation.navigate('ReadingScreen');
+              } else if (module.title === 'Grammar') {
+                navigation.navigate('GrammarTheoryScreen');
               }
             }}
           />

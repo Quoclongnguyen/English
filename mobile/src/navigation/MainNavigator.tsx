@@ -7,6 +7,8 @@ import ReviewQuizScreen from '../screens/app/ReviewQuizScreen';
 import CameraChecklistScreen from '../screens/app/CameraChecklistScreen';
 import ListeningPlayerScreen from '../screens/app/ListeningPlayerScreen';
 import ReadingScreen from '../screens/app/ReadingScreen';
+import GrammarTheoryScreen from '../screens/app/GrammarTheoryScreen';
+import GrammarExerciseScreen from '../screens/app/GrammarExerciseScreen';
 import { Word } from '../types';
 
 export type MainStackParamList = {
@@ -17,6 +19,8 @@ export type MainStackParamList = {
   CameraChecklistScreen: undefined;
   ListeningPlayerScreen: undefined;
   ReadingScreen: undefined;
+  GrammarTheoryScreen: undefined;
+  GrammarExerciseScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<MainStackParamList>();
@@ -45,6 +49,8 @@ const MainNavigator = () => {
         component={ListeningPlayerScreen}
       />
       <Stack.Screen name="ReadingScreen" component={ReadingScreen} />
+      <Stack.Screen name="GrammarTheoryScreen" component={GrammarTheoryScreen} />
+      <Stack.Screen name="GrammarExerciseScreen" component={GrammarExerciseScreen} />
     </Stack.Navigator>
   );
 };
