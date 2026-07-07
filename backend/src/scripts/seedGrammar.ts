@@ -11,23 +11,32 @@ const seed = async () => {
 
   const seedPath = path.join(__dirname, '../seeds/grammar.sample.json');
   const input = JSON.parse(await fs.promises.readFile(seedPath, 'utf8'));
+  const topics = input.topics ?? [input];
   await mongoose.connect(mongoUri);
 
-  const topic = await GrammarTopic.findOneAndUpdate(
-    { slug: input.topic.slug },
-    { $set: input.topic },
-    { new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true }
-  );
+  let topicCount = 0;
+  let exerciseCount = 0;
 
-  for (const exercise of input.exercises) {
-    await GrammarExercise.findOneAndUpdate(
-      { topicId: topic._id, order: exercise.order },
-      { $set: { ...exercise, topicId: topic._id } },
+  for (const item of topics) {
+    const topic = await GrammarTopic.findOneAndUpdate(
+      { slug: item.topic.slug },
+      { $set: item.topic },
       { new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true }
     );
+
+    for (const exercise of item.exercises) {
+      await GrammarExercise.findOneAndUpdate(
+        { topicId: topic._id, order: exercise.order },
+        { $set: { ...exercise, topicId: topic._id } },
+        { new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true }
+      );
+      exerciseCount += 1;
+    }
+
+    topicCount += 1;
   }
 
-  console.log(`Seeded grammar topic ${topic._id} with ${input.exercises.length} exercises`);
+  console.log(`Seeded ${topicCount} grammar topics with ${exerciseCount} exercises`);
 };
 
 seed()
