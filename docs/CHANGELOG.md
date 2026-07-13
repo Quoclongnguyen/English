@@ -3,6 +3,13 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Vocabulary topic taxonomy
+- ✅ **Mobile**: Thêm nút quay về Home trong `VocabBankScreen`, topic filter chips và topic badge trên word cards.
+- ✅ **Backend**: Chuẩn hóa `Word.topic` theo curated topic list và gắn `topicSource`.
+- ✅ **Backend**: Camera words được Gemini classify topic khi lưu selected words, không đổi UI Camera.
+- ✅ **Backend**: Thêm `npm run backfill:word-topics` để phân loại lại dữ liệu cũ theo batch.
+- ✅ **Verification**: Backend build pass, mobile TypeScript pass.
+
 ### Beta fixes from real-user testing
 - ✅ **Auth**: Khi access token hết hạn trả 401/403, mobile thử refresh; nếu refresh token fail thì clear session local để quay về Login thay vì kẹt trong app.
 - ✅ **Camera**: Sau khi lưu từ từ ảnh, user có lựa chọn rõ `Vocab Bank`, `Chụp tiếp`, `Về Home`; header cũng có shortcut về Home.

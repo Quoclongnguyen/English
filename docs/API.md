@@ -67,6 +67,29 @@ GET    /api/words/photo-deck              # Lấy Photo Deck, search/sort/pagina
 GET /api/words/photo-deck?sort=recent&search=&page=1&limit=10
 ```
 
+### Vocabulary topics
+`Word.topic` được chuẩn hóa theo curated list:
+
+```txt
+daily-life, work, study, school, family, home, food, travel,
+transport, shopping, health, technology, business, nature, emotion, other
+```
+
+Vocab Bank hỗ trợ filter theo topic:
+
+```http
+GET /api/words/bank?topic=technology
+```
+
+Camera words được auto-classify topic ở backend khi user lưu selected words; UI Camera không đổi.
+
+### Vocabulary maintenance scripts
+```bash
+npm run backfill:word-topics
+```
+
+Script dùng Gemini batch classification để gán lại topic cho dữ liệu cũ (`camera`, `daily`, `ielts`, `toeic`, `other`) và fallback `other` nếu không phân loại được.
+
 ## 4. Listening (`/api/listening`)
 ```http
 GET    /api/listening/lessons/:lessonId         # Lấy bài nghe published + audio + transcript

@@ -1,33 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import {
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { useVocabStore } from '../../../src/stores/vocabStore';
 import { useThemeStore } from '../../../src/stores/themeStore';
 import { Typography } from '../../../src/constants/typography';
 import { Badge } from '../../../src/components/Badge';
 import { PhotoDeckView } from '../../../src/components/PhotoDeckView';
+import {
+  getVocabularyTopicLabel,
+  VocabularyTopic,
+  VOCABULARY_TOPICS,
+} from '../../../src/constants/vocabularyTopics';
 
 type BankTab = 'vocabulary' | 'photos';
 
 const VocabBankScreen = () => {
+  const navigation = useNavigation<any>();
   const { vocabBank, fetchVocabBank, isLoading } = useVocabStore();
   const { colors } = useThemeStore();
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState<BankTab>('vocabulary');
+  const [selectedTopic, setSelectedTopic] = useState<VocabularyTopic | 'all'>('all');
 
   useEffect(() => {
-    fetchVocabBank();
-  }, []);
+    fetchVocabBank(selectedTopic === 'all' ? undefined : { topic: selectedTopic });
+  }, [fetchVocabBank, selectedTopic]);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchVocabBank();
+    await fetchVocabBank(selectedTopic === 'all' ? undefined : { topic: selectedTopic });
     setRefreshing(false);
   };
+
+  const topicOptions = [
+    'all' as const,
+    ...VOCABULARY_TOPICS.filter(topic =>
+      topic === selectedTopic || vocabBank.some(word => word.topic === topic),
+    ),
+  ];
 
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
       <View style={[styles.header, { borderBottomColor: colors.border }]}>
-        <Text style={[styles.title, { color: colors.text }]}>Vocab Bank</Text>
+        <View style={styles.headerTop}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Home')}
+            style={styles.backButton}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="chevron-back" size={25} color={colors.text} />
+          </TouchableOpacity>
+          <Text style={[styles.title, { color: colors.text }]}>Vocab Bank</Text>
+        </View>
         <Text style={[styles.subtitle, { color: colors.textMuted }]}>
           Từ đã học và những câu chuyện qua ảnh
         </Text>
@@ -53,6 +85,34 @@ const VocabBankScreen = () => {
             Photo Deck
           </Text>
         </View>
+
+        {activeTab === 'vocabulary' ? (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.topicChips}
+          >
+            {topicOptions.map(topic => {
+              const active = selectedTopic === topic;
+              return (
+                <Text
+                  key={topic}
+                  onPress={() => setSelectedTopic(topic)}
+                  style={[
+                    styles.topicChip,
+                    {
+                      backgroundColor: active ? colors.accent : colors.surface,
+                      borderColor: active ? colors.accent : colors.border,
+                      color: active ? '#FFFFFF' : colors.textMuted,
+                    },
+                  ]}
+                >
+                  {topic === 'all' ? 'All' : getVocabularyTopicLabel(topic)}
+                </Text>
+              );
+            })}
+          </ScrollView>
+        ) : null}
       </View>
 
       {activeTab === 'vocabulary' ? (
@@ -68,14 +128,23 @@ const VocabBankScreen = () => {
             </Text>
           )}
 
-          {vocabBank.map((word) => (
-            <View key={word._id} style={[styles.card, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+          {vocabBank.map(word => (
+            <View
+              key={word._id}
+              style={[styles.card, { backgroundColor: colors.surface, borderColor: colors.border }]}
+            >
               <View style={styles.cardHeader}>
                 <Text style={[styles.word, { color: colors.text }]}>{word.word}</Text>
-                <Badge
-                  label={word.progress?.status === 'mastered' ? 'Mastered' : 'Learning'}
-                  color={word.progress?.status === 'mastered' ? 'green' : 'yellow'}
-                />
+                <View style={styles.badges}>
+                  <Badge
+                    label={getVocabularyTopicLabel(word.topic)}
+                    color="purple"
+                  />
+                  <Badge
+                    label={word.progress?.status === 'mastered' ? 'Mastered' : 'Learning'}
+                    color={word.progress?.status === 'mastered' ? 'green' : 'yellow'}
+                  />
+                </View>
               </View>
               <Text style={[styles.phonetic, { color: colors.textMuted }]}>{word.phonetic}</Text>
               <Text style={[styles.meaning, { color: colors.text }]}>{word.meaning_vi}</Text>
@@ -93,9 +162,21 @@ const VocabBankScreen = () => {
 const styles = StyleSheet.create({
   screen: { flex: 1 },
   header: {
+    borderBottomWidth: 1,
     padding: 24,
     paddingTop: 48,
-    borderBottomWidth: 1,
+  },
+  headerTop: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+  },
+  backButton: {
+    alignItems: 'center',
+    height: 36,
+    justifyContent: 'center',
+    marginLeft: -8,
+    width: 36,
   },
   title: {
     fontFamily: Typography.fontFamily.bold,
@@ -107,39 +188,55 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   tabs: {
-    flexDirection: 'row',
-    padding: 4,
     borderRadius: 16,
+    flexDirection: 'row',
     marginTop: 18,
+    padding: 4,
+  },
+  topicChips: {
+    gap: 8,
+    paddingTop: 14,
+  },
+  topicChip: {
+    borderRadius: 999,
+    borderWidth: 1,
+    fontFamily: Typography.fontFamily.bold,
+    fontSize: 12,
+    overflow: 'hidden',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
   },
   tab: {
-    flex: 1,
-    overflow: 'hidden',
     borderRadius: 12,
-    paddingVertical: 10,
-    textAlign: 'center',
+    flex: 1,
     fontFamily: Typography.fontFamily.bold,
     fontSize: 13,
+    overflow: 'hidden',
+    paddingVertical: 10,
+    textAlign: 'center',
   },
   list: {
-    padding: 16,
     gap: 12,
+    padding: 16,
   },
   empty: {
-    textAlign: 'center',
-    marginTop: 40,
     fontFamily: Typography.fontFamily.regular,
+    marginTop: 40,
+    textAlign: 'center',
   },
   card: {
-    padding: 16,
     borderRadius: 16,
     borderWidth: 1,
     gap: 6,
+    padding: 16,
   },
   cardHeader: {
+    gap: 8,
+  },
+  badges: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 6,
   },
   word: {
     fontFamily: Typography.fontFamily.bold,
