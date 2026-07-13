@@ -14,6 +14,11 @@ import { useThemeStore } from '../../../src/stores/themeStore';
 import { Typography } from '../../../src/constants/typography';
 import { Badge } from '../../../src/components/Badge';
 import { PhotoDeckView } from '../../../src/components/PhotoDeckView';
+import {
+  getVocabularyTopicLabel,
+  VocabularyTopic,
+  VOCABULARY_TOPICS,
+} from '../../../src/constants/vocabularyTopics';
 
 type BankTab = 'vocabulary' | 'photos';
 
@@ -23,16 +28,24 @@ const VocabBankScreen = () => {
   const { colors } = useThemeStore();
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState<BankTab>('vocabulary');
+  const [selectedTopic, setSelectedTopic] = useState<VocabularyTopic | 'all'>('all');
 
   useEffect(() => {
-    fetchVocabBank();
-  }, [fetchVocabBank]);
+    fetchVocabBank(selectedTopic === 'all' ? undefined : { topic: selectedTopic });
+  }, [fetchVocabBank, selectedTopic]);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchVocabBank();
+    await fetchVocabBank(selectedTopic === 'all' ? undefined : { topic: selectedTopic });
     setRefreshing(false);
   };
+
+  const topicOptions = [
+    'all' as const,
+    ...VOCABULARY_TOPICS.filter(topic =>
+      topic === selectedTopic || vocabBank.some(word => word.topic === topic),
+    ),
+  ];
 
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
@@ -72,6 +85,34 @@ const VocabBankScreen = () => {
             Photo Deck
           </Text>
         </View>
+
+        {activeTab === 'vocabulary' ? (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.topicChips}
+          >
+            {topicOptions.map(topic => {
+              const active = selectedTopic === topic;
+              return (
+                <Text
+                  key={topic}
+                  onPress={() => setSelectedTopic(topic)}
+                  style={[
+                    styles.topicChip,
+                    {
+                      backgroundColor: active ? colors.accent : colors.surface,
+                      borderColor: active ? colors.accent : colors.border,
+                      color: active ? '#FFFFFF' : colors.textMuted,
+                    },
+                  ]}
+                >
+                  {topic === 'all' ? 'All' : getVocabularyTopicLabel(topic)}
+                </Text>
+              );
+            })}
+          </ScrollView>
+        ) : null}
       </View>
 
       {activeTab === 'vocabulary' ? (
@@ -94,10 +135,16 @@ const VocabBankScreen = () => {
             >
               <View style={styles.cardHeader}>
                 <Text style={[styles.word, { color: colors.text }]}>{word.word}</Text>
-                <Badge
-                  label={word.progress?.status === 'mastered' ? 'Mastered' : 'Learning'}
-                  color={word.progress?.status === 'mastered' ? 'green' : 'yellow'}
-                />
+                <View style={styles.badges}>
+                  <Badge
+                    label={getVocabularyTopicLabel(word.topic)}
+                    color="purple"
+                  />
+                  <Badge
+                    label={word.progress?.status === 'mastered' ? 'Mastered' : 'Learning'}
+                    color={word.progress?.status === 'mastered' ? 'green' : 'yellow'}
+                  />
+                </View>
               </View>
               <Text style={[styles.phonetic, { color: colors.textMuted }]}>{word.phonetic}</Text>
               <Text style={[styles.meaning, { color: colors.text }]}>{word.meaning_vi}</Text>
@@ -146,6 +193,19 @@ const styles = StyleSheet.create({
     marginTop: 18,
     padding: 4,
   },
+  topicChips: {
+    gap: 8,
+    paddingTop: 14,
+  },
+  topicChip: {
+    borderRadius: 999,
+    borderWidth: 1,
+    fontFamily: Typography.fontFamily.bold,
+    fontSize: 12,
+    overflow: 'hidden',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
   tab: {
     borderRadius: 12,
     flex: 1,
@@ -171,9 +231,12 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   cardHeader: {
-    alignItems: 'center',
+    gap: 8,
+  },
+  badges: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: 6,
   },
   word: {
     fontFamily: Typography.fontFamily.bold,
