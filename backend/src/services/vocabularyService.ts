@@ -5,6 +5,8 @@ import { Word } from '../models/Word';
 import { UserWordProgress } from '../models/UserWordProgress';
 import { XP_ECONOMY, RATE_CAPS } from '../config/xpConfig';
 import { BadgeService } from './badgeService';
+import { classifyVocabularyTopics } from './geminiService';
+import { normalizeVocabularyTopic, VocabularyTopic } from '../constants/vocabularyTopics';
 
 const badgeService = new BadgeService();
 
@@ -34,6 +36,19 @@ export class VocabularyService {
     const savedWordStrings: string[] = [];
     const newWords: string[] = [];
     const duplicates: string[] = [];
+    const topicClassifications = await classifyVocabularyTopics(
+      selectedWords.map(word => ({
+        word: word.word,
+        meaning_vi: word.meaning_vi,
+        example: word.example,
+      }))
+    );
+    const topicMap = new Map(
+      topicClassifications.map(item => [
+        item.word.trim().toLowerCase(),
+        item.topic,
+      ])
+    );
 
     // Helper to calculate daily scan XP cap
     const today = new Date();
@@ -53,6 +68,9 @@ export class VocabularyService {
     // Process each selected word
     for (const wordData of selectedWords) {
       const wordLower = wordData.word.toLowerCase().trim();
+      const topic: VocabularyTopic = normalizeVocabularyTopic(
+        (wordData as any).topic || topicMap.get(wordLower)
+      );
       savedWordStrings.push(wordLower);
 
       // 1. Ensure Word exists in global collection
@@ -66,9 +84,14 @@ export class VocabularyService {
           example: wordData.example,
           source: 'camera',
           photoRef: photoScan.photoUrl,
-          topic: 'camera',
+          topic,
+          topicSource: topic === 'other' ? 'fallback' : 'gemini',
           level: user.level
         });
+      } else if (wordDoc.topic === 'other' && topic !== 'other') {
+        wordDoc.topic = topic;
+        wordDoc.topicSource = 'gemini';
+        await wordDoc.save();
       }
 
       // 2. Check if already in user's unified vocabulary array
@@ -297,7 +320,9 @@ export class VocabularyService {
             phonetic: w.phonetic,
             type: w.type,
             meaning_vi: w.meaning_vi,
-            example: w.example
+            example: w.example,
+            topic: w.topic,
+            topicSource: w.topicSource
           }))
         };
       })
