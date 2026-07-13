@@ -8,11 +8,19 @@ import { XP_ECONOMY } from '../config/xpConfig';
 import { BadgeService } from '../services/badgeService';
 import { UploadService } from '../services/uploadService';
 import { VocabularyService } from '../services/vocabularyService';
+import { VocabularyTopic } from '../constants/vocabularyTopics';
 
 const badgeService = new BadgeService();
 const uploadService = new UploadService();
 const geminiService = new GeminiService();
 const vocabularyService = new VocabularyService();
+
+const topicFromGoal = (goal: string): VocabularyTopic => {
+  if (goal === 'business') return 'business';
+  if (goal === 'daily') return 'daily-life';
+  if (goal === 'ielts' || goal === 'toeic') return 'study';
+  return 'other';
+};
 
 // Extend Express Request to include user (added by auth middleware)
 interface AuthRequest extends Request {
@@ -68,7 +76,8 @@ export const getDailyWords = async (req: AuthRequest, res: Response): Promise<vo
       .filter(gw => !existingWordMap.has(gw.word))
       .map(gw => ({
         ...gw,
-        topic: user.goal,
+        topic: topicFromGoal(user.goal),
+        topicSource: 'fallback',
         level: user.level,
         source: 'daily',
         story: result.story

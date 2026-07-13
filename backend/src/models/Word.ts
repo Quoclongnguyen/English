@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import { VOCABULARY_TOPICS, VocabularyTopic } from '../constants/vocabularyTopics';
 
 export interface IWord extends Document {
   word: string;
@@ -8,7 +9,8 @@ export interface IWord extends Document {
   example: string;
   story?: string;
   audioUrl?: string;
-  topic: string;
+  topic: VocabularyTopic;
+  topicSource?: 'manual' | 'gemini' | 'seed' | 'fallback';
   level: string;
   source: 'daily' | 'camera' | 'listening';
   photoRef?: string;
@@ -26,7 +28,17 @@ const WordSchema = new Schema<IWord>(
     example: { type: String, required: true, trim: true },
     story: { type: String },
     audioUrl: { type: String },
-    topic: { type: String, required: true },
+    topic: {
+      type: String,
+      enum: VOCABULARY_TOPICS,
+      default: 'other',
+      required: true,
+    },
+    topicSource: {
+      type: String,
+      enum: ['manual', 'gemini', 'seed', 'fallback'],
+      default: 'fallback',
+    },
     level: { type: String, required: true },
     source: { type: String, enum: ['daily', 'camera', 'listening'], default: 'daily' },
     photoRef: { type: String },

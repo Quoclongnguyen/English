@@ -81,6 +81,24 @@ export interface UserWordProgress {
   lastResult?: 'correct' | 'wrong';
 }
 
+export type VocabularyTopic =
+  | 'daily-life'
+  | 'work'
+  | 'study'
+  | 'school'
+  | 'family'
+  | 'home'
+  | 'food'
+  | 'travel'
+  | 'transport'
+  | 'shopping'
+  | 'health'
+  | 'technology'
+  | 'business'
+  | 'nature'
+  | 'emotion'
+  | 'other';
+
 export interface Word {
   _id: string;
   word: string;
@@ -90,7 +108,8 @@ export interface Word {
   example: string;
   story?: string;
   audioUrl?: string;
-  topic: string;
+  topic: VocabularyTopic;
+  topicSource?: 'manual' | 'gemini' | 'seed' | 'fallback';
   level: string;
   source: 'daily' | 'camera' | 'listening';
   progress?: UserWordProgress;
@@ -150,6 +169,7 @@ export interface CameraWord {
   phonetic: string;
   meaning_vi: string;
   example: string;
+  topic?: VocabularyTopic;
 }
 
 export interface PhotoScanResult {
