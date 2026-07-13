@@ -13,6 +13,7 @@ import {
 interface VocabState {
   dailyWords: Word[];
   dailyStory: string;
+  isDailySessionCompleted: boolean;
   vocabBank: Word[];
   reviewQueue: UserWordProgress[];
   isLoading: boolean;
@@ -31,6 +32,7 @@ interface VocabState {
   fetchReviewQueue: () => Promise<void>;
   updateWordProgress: (wordId: string, quality: number) => Promise<void>;
   clearDailyWords: () => void;
+  markDailySessionCompleted: () => void;
   scanPhoto: (base64Image: string, mimeType: string, localImageUri: string) => Promise<void>;
   saveWordsFromScan: (selectedWords: CameraWord[]) => Promise<SaveCameraWordsResponse>;
   clearScanResult: () => void;
@@ -40,6 +42,7 @@ interface VocabState {
 export const useVocabStore = create<VocabState>((set, get) => ({
   dailyWords: [],
   dailyStory: '',
+  isDailySessionCompleted: false,
   vocabBank: [],
   reviewQueue: [],
   isLoading: false,
@@ -60,6 +63,7 @@ export const useVocabStore = create<VocabState>((set, get) => ({
       set({
         dailyWords: response.words || [],
         dailyStory: response.story || '',
+        isDailySessionCompleted: false,
         isLoading: false,
       });
     } catch (error: any) {
@@ -100,8 +104,10 @@ export const useVocabStore = create<VocabState>((set, get) => ({
   },
 
   clearDailyWords: () => {
-    set({ dailyWords: [], dailyStory: '' });
+    set({ dailyWords: [], dailyStory: '', isDailySessionCompleted: false });
   },
+
+  markDailySessionCompleted: () => set({ isDailySessionCompleted: true }),
 
   scanPhoto: async (base64Image, mimeType, localImageUri) => {
     set({ isScanning: true, error: null, currentScanResult: null });
