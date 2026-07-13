@@ -6,9 +6,10 @@ import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
 import OnboardingNavigator from './OnboardingNavigator';
 import SplashScreen from '../screens/auth/SplashScreen';
+import { setSessionExpiredHandler } from '../services/api';
 
 const RootNavigator = () => {
-  const { isAuthenticated, isInitializing, loadFromStorage } = useAuthStore();
+  const { isAuthenticated, isInitializing, loadFromStorage, clearSession } = useAuthStore();
   const {
     isCompleted: isOnboardingCompleted,
     isInitializing: isOnboardingInitializing,
@@ -18,6 +19,14 @@ const RootNavigator = () => {
   useEffect(() => {
     loadFromStorage();
   }, [loadFromStorage]);
+
+  useEffect(() => {
+    setSessionExpiredHandler(() => {
+      clearSession().catch(() => undefined);
+    });
+
+    return () => setSessionExpiredHandler(null);
+  }, [clearSession]);
 
   useEffect(() => {
     if (isAuthenticated) {

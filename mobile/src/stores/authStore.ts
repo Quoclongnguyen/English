@@ -8,6 +8,7 @@ interface AuthStore extends AuthState {
   login: (payload: LoginPayload) => Promise<void>;
   register: (payload: RegisterPayload) => Promise<void>;
   logout: () => Promise<void>;
+  clearSession: () => Promise<void>;
   loadFromStorage: () => Promise<void>;
   setUser: (user: User) => void;
 }
@@ -81,9 +82,20 @@ export const useAuthStore = create<AuthStore>((set) => ({
     } catch {
       // Vẫn logout local dù API fail
     } finally {
-      await AsyncStorage.multiRemove([STORAGE_KEYS.ACCESS_TOKEN, STORAGE_KEYS.REFRESH_TOKEN]);
-      set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false });
+      await useAuthStore.getState().clearSession();
     }
+  },
+
+  clearSession: async () => {
+    await AsyncStorage.multiRemove([STORAGE_KEYS.ACCESS_TOKEN, STORAGE_KEYS.REFRESH_TOKEN]);
+    set({
+      user: null,
+      accessToken: null,
+      refreshToken: null,
+      isAuthenticated: false,
+      isLoading: false,
+      isInitializing: false,
+    });
   },
 
   setUser: (user: User) => set({ user }),
