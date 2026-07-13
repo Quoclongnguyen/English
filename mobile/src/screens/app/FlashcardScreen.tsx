@@ -17,10 +17,11 @@ const FlashcardScreen = () => {
   const route = useRoute<any>();
   const navigation = useNavigation<any>();
   const { colors } = useThemeStore();
-  const { updateWordProgress } = useVocabStore();
+  const { updateWordProgress, markDailySessionCompleted } = useVocabStore();
 
   const words: Word[] = route.params?.words || [];
   const isReviewMode = route.params?.isReviewMode || false;
+  const isDailyVocabSession = route.params?.isDailyVocabSession || false;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -61,6 +62,9 @@ const FlashcardScreen = () => {
       setIsFlipped(false);
       setCurrentIndex((prev) => prev + 1);
     } else {
+      if (isDailyVocabSession) {
+        markDailySessionCompleted();
+      }
       navigation.goBack();
     }
   };
