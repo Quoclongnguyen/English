@@ -8,6 +8,7 @@
 - ✅ **Backend**: Chuẩn hóa `Word.topic` theo curated topic list và gắn `topicSource`.
 - ✅ **Backend**: Camera words được Gemini classify topic khi lưu selected words, không đổi UI Camera.
 - ✅ **Backend**: Thêm `npm run backfill:word-topics` để phân loại lại dữ liệu cũ theo batch.
+- ✅ **Fix**: Backfill topic giảm batch size, retry lỗi Gemini 503, parse JSON an toàn hơn và tự chia batch khi parse fail.
 - ✅ **Verification**: Backend build pass, mobile TypeScript pass.
 
 ### Beta fixes from real-user testing
