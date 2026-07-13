@@ -3,6 +3,12 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Phase 4 Beta Test (Feedback MVP)
+- ✅ **Backend**: Thêm `Feedback` model và API `POST /api/feedback`, `GET /api/feedback/my` để thu thập góp ý real users.
+- ✅ **Mobile**: Thêm `FeedbackScreen` với module picker, rating 1–5 và message; đặt entry point ở cuối `HomeScreen`.
+- ✅ **Docs**: Thêm `docs/BETA_TEST.md` làm checklist test thủ công cho real users.
+- ✅ **Verification**: Backend build pass, mobile TypeScript pass, test API feedback bằng user thật/local token thành công.
+
 ### Phase 4 Listening — Gemini TTS
 - ✅ **Backend**: Thêm `generate:listening-audio` dùng `gemini-2.5-flash-preview-tts` tạo PCM và đóng gói WAV.
 - ✅ **Backend**: Hỗ trợ upload audio lên Cloudinary khi có credentials; fallback sang `/public/uploads` khi chạy local.

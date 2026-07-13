@@ -38,8 +38,13 @@ Tài liệu này chứa toàn bộ các tính năng, danh sách màn hình, mô 
 ### 🎧 Listening & 📰 Reading & 📝 Grammar
 - ✅ Listening MVP: Audio player, speed control, transcript EN/VI ẩn hiện.
 - ✅ Reading MVP: Bài đọc song ngữ, AI giải thích section, tóm tắt bài.
-- 🔲 Grammar: Bài giảng lý thuyết, bài tập (kèm giải thích khi sai).
+- ✅ Grammar MVP: Danh sách chủ điểm, bài giảng lý thuyết, bài tập MCQ/fill blank và giải thích khi sai.
 - 🔄 Tap từ khó → Listening đã có xem nghĩa + lưu; Reading chưa có.
+
+### 🧪 Beta test với real users
+- ✅ Feedback form thủ công ở cuối Home: chọn module, rating 1–5, nhập message.
+- ✅ Backend lưu feedback vào MongoDB để review sau.
+- ✅ Checklist test thủ công trong `docs/BETA_TEST.md`.
 
 ### 🎮 Gamification & 🔔 Notifications
 - ✅ Streak đếm ngày + Streak Freeze
@@ -67,7 +72,8 @@ Tài liệu này chứa toàn bộ các tính năng, danh sách màn hình, mô 
 ### Flows
 - **Vocabulary:** `DailyVocabScreen`, `FlashcardScreen`, `ReviewQuizScreen` (explanation hiển thị cùng màn).
 - **Camera:** `CameraChecklistScreen`.
-- **Learn:** `ListeningPlayerScreen`, `ReadingScreen`; Grammar screens chưa triển khai.
+- **Learn:** `ListeningPlayerScreen`, `ReadingScreen`, `GrammarTopicListScreen`, `GrammarTheoryScreen`, `GrammarExerciseScreen`.
+- **Beta:** `FeedbackScreen` mở từ cuối `HomeScreen`.
 
 ---
 
@@ -116,8 +122,13 @@ theo passage, section và trình độ người học.
 ### PhotoScan
 Lưu ảnh Camera Vocabulary, mini-story, detected words, saved words và XP.
 
-### GrammarTopic
-Chưa triển khai.
+### GrammarTopic & GrammarExercise
+`GrammarTopic` lưu chủ điểm, theory, usages, structures, notes. `GrammarExercise` lưu câu hỏi
+multiple choice/fill blank, đáp án đúng, accepted answers và explanation pre-written.
+
+### Feedback
+Lưu feedback beta test gồm `userId`, `module`, `rating`, `message`, thông tin thiết bị cơ bản
+và trạng thái xử lý `new|reviewed|resolved`.
 
 ### Badge
 Ghi nhận huy hiệu user đạt được (`streak_7`, `words_100`...).

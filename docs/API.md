@@ -151,7 +151,75 @@ Summary được generate một lần rồi lưu trong `ReadingPassage`.
 npm run seed:reading
 ```
 
-## 6. User & Gamification (`/api/users`)
+## 6. Grammar (`/api/grammar`)
+```http
+GET    /api/grammar/topics                      # Danh sách chủ điểm Grammar published
+GET    /api/grammar/topics/:topicId             # Lấy theory của một chủ điểm
+GET    /api/grammar/topics/:topicId/exercises   # Lấy bài tập, không trả đáp án đúng
+POST   /api/grammar/exercises/:exerciseId/submit # Chấm đáp án và trả giải thích
+```
+
+### `POST /api/grammar/exercises/:exerciseId/submit`
+```json
+{
+  "answer": "b"
+}
+```
+
+Response:
+```json
+{
+  "exerciseId": "ObjectId",
+  "isCorrect": false,
+  "submittedAnswer": "go",
+  "correctAnswer": "b",
+  "correctAnswerText": "goes",
+  "explanation": {
+    "rule": "Quy tắc ngữ pháp...",
+    "correctReason": "Vì sao đáp án đúng...",
+    "mistakeReason": "Lỗi sai thường gặp..."
+  }
+}
+```
+
+### Grammar content script
+```bash
+npm run seed:grammar
+```
+
+## 7. Beta Feedback (`/api/feedback`)
+```http
+POST   /api/feedback                            # Gửi feedback beta test
+GET    /api/feedback/my                         # Lấy 30 feedback gần nhất của user hiện tại
+```
+
+### `POST /api/feedback`
+```json
+{
+  "module": "grammar",
+  "rating": 5,
+  "message": "Topic selection works well.",
+  "platform": "android",
+  "appVersion": "dev",
+  "deviceModel": "Pixel"
+}
+```
+
+Response:
+```json
+{
+  "feedback": {
+    "id": "ObjectId",
+    "module": "grammar",
+    "rating": 5,
+    "message": "Topic selection works well.",
+    "status": "new",
+    "createdAt": "2026-07-13T..."
+  }
+}
+```
+
+## 8. User & Gamification (`/api/users`)
 ```http
 GET    /api/users/stats                         # XP, streak, vocabulary, badges, weekly progress
 PUT    /api/users/profile                       # Cập nhật displayName/avatarUrl
@@ -159,7 +227,7 @@ POST   /api/users/streak-freeze/buy             # Mua 1 freeze bằng XP
 POST   /api/users/streak-freeze/use-manual      # Dùng freeze thủ công
 ```
 
-## 7. Gemini AI Integration
+## 9. Gemini AI Integration
 
 Gemini hiện được gọi nội bộ qua Vocabulary, Camera và Reading APIs, không có router `/api/gemini` public.
 
@@ -167,7 +235,7 @@ Các model đang dùng:
 - `gemini-2.5-flash`: Daily Vocab, Camera Vision, Reading Explain, Reading Summary.
 - `gemini-2.5-flash-preview-tts`: tạo audio Listening.
 
-## 8. Chưa triển khai
+## 10. Chưa triển khai
 
 Các nhóm endpoint sau vẫn thuộc kế hoạch, chưa có trong code:
 
@@ -175,10 +243,6 @@ Các nhóm endpoint sau vẫn thuộc kế hoạch, chưa có trong code:
 POST   /api/auth/google
 POST   /api/auth/apple
 GET    /api/onboarding/roadmap
-
-GET    /api/grammar/topics
-GET    /api/grammar/topics/:id
-POST   /api/grammar/topics/:id/submit
 
 POST   /api/notifications/register-token
 DELETE /api/notifications/token

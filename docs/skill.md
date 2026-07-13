@@ -2,8 +2,8 @@
 
 > **Mục tiêu:** Ứng dụng học tiếng Anh toàn diện trên mobile (iOS & Android)
 > **Tech Stack:** React Native (Expo) · TypeScript · Node.js · MongoDB
-> **Trạng thái dự án:** 🟡 Phase 4 đang thực hiện — Listening & Reading MVP hoàn thành
-> **Cập nhật lần cuối:** 2026-07-07
+> **Trạng thái dự án:** 🟡 Phase 4 đang thực hiện — Content MVP + Beta feedback form hoàn thành
+> **Cập nhật lần cuối:** 2026-07-13
 
 ---
 
@@ -197,8 +197,8 @@ English/
 ### Phase 4 — Content (Tháng 4–5)
 - ✅ Listening MVP (player + transcript + tap-to-save + Gemini TTS)
 - ✅ Reading MVP (song ngữ + AI explain + summary)
-- 🔲 Grammar module (theory + exercise + giải thích sai)
-- 🔲 Beta test với real users
+- ✅ Grammar module (topic list + theory + exercise + giải thích sai)
+- ✅ Beta test với real users (feedback form thủ công + checklist)
 
 ### Phase 5 — Launch (Tháng 6)
 - 🔲 Bug fixes + performance
@@ -230,7 +230,8 @@ English/
 - Listening và Reading hiện dùng ID bài seed cố định, chưa có màn danh sách nội dung.
 - Reading chưa hỗ trợ tap-to-save từ.
 - Review Quiz mới có Multiple Choice; chưa có Fill-in-blank và Listen & Type.
-- Push Notifications, Grammar, Beta infrastructure và Admin Dashboard chưa triển khai.
+- Push Notifications, analytics/crash reporting bên thứ ba và Admin Dashboard chưa triển khai.
+- Feedback beta đã có form thủ công; chưa có màn admin để review/tổ chức feedback.
 - Timestamp Gemini TTS hiện scale theo tổng duration, chưa phải forced alignment chính xác từng từ.
 
 ---
