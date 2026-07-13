@@ -4,7 +4,7 @@ import { Word } from '../models/Word';
 import { classifyVocabularyTopics } from '../services/geminiService';
 import { normalizeVocabularyTopic } from '../constants/vocabularyTopics';
 
-const BATCH_SIZE = 25;
+const BATCH_SIZE = 10;
 
 const backfill = async () => {
   const mongoUri = process.env.MONGODB_URI;
