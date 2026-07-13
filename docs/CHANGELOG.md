@@ -3,6 +3,11 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Daily Vocab UX clarity
+- ✅ **Mobile**: `DailyVocabScreen` thêm back button về Home, context card giải thích AI chọn từ dựa trên level/goal/daily target/learned words.
+- ✅ **Mobile**: Thêm progress indicator, empty state có CTA generate words, link sang Vocab Bank và completion card sau khi hoàn thành flashcards.
+- ✅ **Mobile**: `FlashcardScreen` đánh dấu daily vocab session completed khi user đi hết deck.
+
 ### Vocabulary topic taxonomy
 - ✅ **Mobile**: Thêm nút quay về Home trong `VocabBankScreen`, topic filter chips và topic badge trên word cards.
 - ✅ **Backend**: Chuẩn hóa `Word.topic` theo curated topic list và gắn `topicSource`.
