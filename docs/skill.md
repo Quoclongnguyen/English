@@ -232,6 +232,7 @@ English/
 - Review Quiz mới có Multiple Choice; chưa có Fill-in-blank và Listen & Type.
 - Push Notifications, analytics/crash reporting bên thứ ba và Admin Dashboard chưa triển khai.
 - Feedback beta đã có form thủ công; chưa có màn admin để review/tổ chức feedback.
+- Vocab Bank đã có topic filter/badge; Daily Vocab chưa có UX chọn topic trước khi học.
 - Timestamp Gemini TTS hiện scale theo tổng duration, chưa phải forced alignment chính xác từng từ.
 
 ---
@@ -246,6 +247,7 @@ English/
 - Vocab Bank hiện được hợp nhất từ `Word`, `User.vocabulary` và `UserWordProgress`; luồng save phải đồng bộ cả ba.
 - Reading explanation nên cache theo passage, section và level; summary nên generate một lần rồi lưu.
 - Seed JSON phù hợp cho MVP content; khi số bài tăng cần lesson list và Admin CMS.
+- Vocabulary topic nên lưu bằng slug chuẩn (`work`, `technology`, `daily-life`...) và fallback `other` khi Gemini classify không chắc chắn.
 
 ---
 
