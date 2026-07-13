@@ -3,6 +3,11 @@
 > Ghi chú lại những thay đổi lớn, tính năng đã hoàn thành theo thời gian để dễ theo dõi.
 
 ## [Unreleased]
+### Beta fixes from real-user testing
+- ✅ **Auth**: Khi access token hết hạn trả 401/403, mobile thử refresh; nếu refresh token fail thì clear session local để quay về Login thay vì kẹt trong app.
+- ✅ **Camera**: Sau khi lưu từ từ ảnh, user có lựa chọn rõ `Vocab Bank`, `Chụp tiếp`, `Về Home`; header cũng có shortcut về Home.
+- ✅ **Docs**: Ghi lại beta findings đã xử lý và các vấn đề cần phân tích tiếp trong `docs/BETA_TEST.md`.
+
 ### Phase 4 Beta Test (Feedback MVP)
 - ✅ **Backend**: Thêm `Feedback` model và API `POST /api/feedback`, `GET /api/feedback/my` để thu thập góp ý real users.
 - ✅ **Mobile**: Thêm `FeedbackScreen` với module picker, rating 1–5 và message; đặt entry point ở cuối `HomeScreen`.

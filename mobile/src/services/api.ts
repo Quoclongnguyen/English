@@ -7,6 +7,12 @@ const STORAGE_KEYS = {
   REFRESH_TOKEN: '@lexis/refresh_token',
 };
 
+let sessionExpiredHandler: (() => void) | null = null;
+
+export const setSessionExpiredHandler = (handler: (() => void) | null) => {
+  sessionExpiredHandler = handler;
+};
+
 //Axios Instance
 
 const api: AxiosInstance = axios.create({
@@ -46,7 +52,11 @@ api.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    const shouldAttemptRefresh =
+      (error.response?.status === 401 || error.response?.status === 403) &&
+      !originalRequest._retry;
+
+    if (shouldAttemptRefresh) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
@@ -78,6 +88,7 @@ api.interceptors.response.use(
         processQueue(refreshError, null);
         // Clear tokens — force logout
         await AsyncStorage.multiRemove([STORAGE_KEYS.ACCESS_TOKEN, STORAGE_KEYS.REFRESH_TOKEN]);
+        sessionExpiredHandler?.();
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

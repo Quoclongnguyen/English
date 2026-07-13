@@ -1,5 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from '../../components/Button';
@@ -13,21 +21,35 @@ const CameraChecklistScreen = () => {
   const { colors } = useThemeStore();
   const { currentScanResult, isSavingScan, saveWordsFromScan, clearScanResult } = useVocabStore();
   const [selected, setSelected] = useState<Set<string>>(
-    () => new Set(currentScanResult?.words.map((word) => word.word) || []),
+    () => new Set(currentScanResult?.words.map(word => word.word) || []),
   );
 
   const selectedWords = useMemo(
-    () => currentScanResult?.words.filter((word) => selected.has(word.word)) || [],
+    () => currentScanResult?.words.filter(word => selected.has(word.word)) || [],
     [currentScanResult, selected],
   );
 
+  const goToTab = (screen: 'Home' | 'Camera' | 'VocabBank') => {
+    clearScanResult();
+    navigation.navigate('Tabs', { screen });
+  };
+
   const toggleWord = (word: string) => {
-    setSelected((current) => {
+    setSelected(current => {
       const next = new Set(current);
       if (next.has(word)) next.delete(word);
       else next.add(word);
       return next;
     });
+  };
+
+  const toggleAll = () => {
+    if (!currentScanResult) return;
+    setSelected(
+      selected.size === currentScanResult.words.length
+        ? new Set()
+        : new Set(currentScanResult.words.map(word => word.word)),
+    );
   };
 
   const handleSave = async () => {
@@ -36,10 +58,17 @@ const CameraChecklistScreen = () => {
       Alert.alert(
         `Đã lưu ${result.newWordsCount} từ mới`,
         `${result.duplicatesCount ? `Đã học trước đó: ${result.duplicatesCount}. ` : ''}+${result.xpEarned} XP`,
-        [{ text: 'Xong', onPress: () => { clearScanResult(); navigation.navigate('Tabs', { screen: 'VocabBank' }); } }],
+        [
+          { text: 'Vocab Bank', onPress: () => goToTab('VocabBank') },
+          { text: 'Chụp tiếp', onPress: () => goToTab('Camera') },
+          { text: 'Về Home', onPress: () => goToTab('Home') },
+        ],
       );
     } catch (error) {
-      Alert.alert('Không thể lưu từ', error instanceof Error ? error.message : 'Vui lòng thử lại.');
+      Alert.alert(
+        'Không thể lưu từ',
+        error instanceof Error ? error.message : 'Vui lòng thử lại.',
+      );
     }
   };
 
@@ -48,6 +77,12 @@ const CameraChecklistScreen = () => {
       <View style={[styles.empty, { backgroundColor: colors.background }]}>
         <Text style={[styles.emptyText, { color: colors.text }]}>Không còn kết quả quét.</Text>
         <Button title="Quay lại Camera" onPress={() => navigation.goBack()} color="purple" />
+        <Button
+          title="Về Home"
+          onPress={() => navigation.navigate('Tabs', { screen: 'Home' })}
+          variant="outline"
+          color="green"
+        />
       </View>
     );
   }
@@ -59,10 +94,17 @@ const CameraChecklistScreen = () => {
           <Ionicons name="chevron-back" size={26} color={colors.text} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { color: colors.text }]}>Chọn từ muốn học</Text>
-        <Text style={[styles.count, { color: colors.primary }]}>{selected.size}/{currentScanResult.words.length}</Text>
+        <TouchableOpacity onPress={() => goToTab('Home')} style={styles.homeButton}>
+          <Ionicons name="home-outline" size={20} color={colors.primary} />
+          <Text style={[styles.count, { color: colors.primary }]}>
+            {selected.size}/{currentScanResult.words.length}
+          </Text>
+        </TouchableOpacity>
       </View>
+
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <Image source={{ uri: currentScanResult.localImageUri }} style={styles.photo} />
+
         <Card style={styles.storyCard}>
           <View style={styles.storyHeading}>
             <Ionicons name="sparkles" size={18} color={colors.accent} />
@@ -70,22 +112,30 @@ const CameraChecklistScreen = () => {
           </View>
           <Text style={[styles.story, { color: colors.text }]}>{currentScanResult.story}</Text>
         </Card>
+
         <View style={styles.listHeading}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>Gemini tìm thấy</Text>
-          <TouchableOpacity
-            onPress={() => setSelected(selected.size === currentScanResult.words.length ? new Set() : new Set(currentScanResult.words.map((word) => word.word)))}
-          >
+          <TouchableOpacity onPress={toggleAll}>
             <Text style={[styles.selectAll, { color: colors.primary }]}>
               {selected.size === currentScanResult.words.length ? 'Bỏ chọn tất cả' : 'Chọn tất cả'}
             </Text>
           </TouchableOpacity>
         </View>
-        {currentScanResult.words.map((word) => {
+
+        {currentScanResult.words.map(word => {
           const checked = selected.has(word.word);
           return (
             <TouchableOpacity key={word.word} activeOpacity={0.8} onPress={() => toggleWord(word.word)}>
               <Card style={[styles.wordCard, checked && { borderColor: colors.primary }]}>
-                <View style={[styles.checkbox, { borderColor: checked ? colors.primary : colors.border, backgroundColor: checked ? colors.primary : 'transparent' }]}>
+                <View
+                  style={[
+                    styles.checkbox,
+                    {
+                      borderColor: checked ? colors.primary : colors.border,
+                      backgroundColor: checked ? colors.primary : 'transparent',
+                    },
+                  ]}
+                >
                   {checked ? <Ionicons name="checkmark" size={17} color="#082014" /> : null}
                 </View>
                 <View style={styles.wordCopy}>
@@ -94,13 +144,16 @@ const CameraChecklistScreen = () => {
                     <Text style={[styles.phonetic, { color: colors.accent }]}>{word.phonetic}</Text>
                   </View>
                   <Text style={[styles.meaning, { color: colors.textMuted }]}>{word.meaning_vi}</Text>
-                  <Text style={[styles.example, { color: colors.textMuted }]} numberOfLines={2}>“{word.example}”</Text>
+                  <Text style={[styles.example, { color: colors.textMuted }]} numberOfLines={2}>
+                    “{word.example}”
+                  </Text>
                 </View>
               </Card>
             </TouchableOpacity>
           );
         })}
       </ScrollView>
+
       <View style={[styles.footer, { backgroundColor: colors.surface, borderTopColor: colors.border }]}>
         <Button
           title={`Lưu ${selected.size} từ`}
@@ -119,10 +172,24 @@ const styles = StyleSheet.create({
   screen: { flex: 1 },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 18, padding: 32 },
   emptyText: { fontFamily: Typography.fontFamily.bold, fontSize: 20 },
-  header: { height: 64, paddingHorizontal: 16, borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  backButton: { width: 38, height: 38, justifyContent: 'center' },
+  header: {
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    height: 64,
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+  },
+  backButton: { height: 38, justifyContent: 'center', width: 38 },
   headerTitle: { fontFamily: Typography.fontFamily.bold, fontSize: 18 },
-  count: { width: 38, textAlign: 'right', fontFamily: Typography.fontFamily.mono, fontSize: 12 },
+  homeButton: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 4,
+    justifyContent: 'flex-end',
+    minWidth: 58,
+  },
+  count: { fontFamily: Typography.fontFamily.mono, fontSize: 12 },
   content: { gap: 14, padding: 18, paddingBottom: 110 },
   photo: { width: '100%', height: 220, borderRadius: 24, backgroundColor: '#22222F' },
   storyCard: { gap: 8 },

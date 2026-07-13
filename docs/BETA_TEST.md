@@ -59,3 +59,18 @@ Fields chính:
 - Screenshot attachment
 
 Các phần này chỉ nên thêm sau khi feedback form thủ công đã có dữ liệu thật từ vài tester đầu tiên.
+
+## 6. Beta findings đã xử lý
+
+| Date | Finding | Fix |
+|---|---|---|
+| 2026-07-13 | iOS giữ session cũ nhưng access/refresh token hết hạn làm app kẹt ở trạng thái đã đăng nhập và API Vocabulary lỗi 401/403. | Mobile API interceptor giờ thử refresh với cả 401/403; nếu refresh fail thì clear token + AuthStore session để RootNavigator quay về Login. |
+| 2026-07-13 | Camera save thành công nhưng user không có lựa chọn rõ để về Home / xem Vocab Bank / chụp tiếp. | `CameraChecklistScreen` thêm Home action ở header và alert sau lưu với 3 lựa chọn: Vocab Bank, Chụp tiếp, Về Home. |
+
+## 7. Beta findings cần phân tích tiếp
+
+| Finding | Ghi chú |
+|---|---|
+| User chưa hiểu app nên học theo lộ trình nào. | Cần thiết kế Learning Path MVP trên Home: Today’s path / next best action. |
+| Vocabulary chưa phân loại chủ đề rõ như công việc, học tập, gia đình, IT. | Cần bổ sung topic taxonomy và UX chọn/gợi ý topic cho Daily Vocab. |
+| Daily Vocabulary có cảm giác lặp lại dữ liệu test ban đầu. | Cần kiểm tra logic exclude learned words, daily cache theo user/ngày và trạng thái sau flashcard. |
