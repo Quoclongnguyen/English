@@ -10,7 +10,8 @@
     "seed:listening": "ts-node src/scripts/seedListening.ts",
     "seed:reading": "ts-node src/scripts/seedReading.ts",
     "generate:listening-audio": "ts-node src/scripts/generateListeningAudio.ts",
-    "seed:grammar": "ts-node src/scripts/seedGrammar.ts"
+    "seed:grammar": "ts-node src/scripts/seedGrammar.ts",
+    "backfill:word-topics": "ts-node src/scripts/backfillWordTopics.ts"
   },
   "dependencies": {
     "@google/genai": "^2.10.0",

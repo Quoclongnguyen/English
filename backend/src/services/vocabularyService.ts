@@ -88,7 +88,7 @@ export class VocabularyService {
           topicSource: topic === 'other' ? 'fallback' : 'gemini',
           level: user.level
         });
-      } else if (wordDoc.topic === 'other' && topic !== 'other') {
+      } else if (normalizeVocabularyTopic(wordDoc.topic) === 'other' && topic !== 'other') {
         wordDoc.topic = topic;
         wordDoc.topicSource = 'gemini';
         await wordDoc.save();
