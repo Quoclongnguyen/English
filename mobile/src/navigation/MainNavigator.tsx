@@ -10,6 +10,7 @@ import ReadingScreen from '../screens/app/ReadingScreen';
 import GrammarTopicListScreen from '../screens/app/GrammarTopicListScreen';
 import GrammarTheoryScreen from '../screens/app/GrammarTheoryScreen';
 import GrammarExerciseScreen from '../screens/app/GrammarExerciseScreen';
+import FeedbackScreen from '../screens/app/FeedbackScreen';
 import { Word } from '../types';
 
 export type MainStackParamList = {
@@ -23,6 +24,7 @@ export type MainStackParamList = {
   GrammarTopicListScreen: undefined;
   GrammarTheoryScreen: { topicId: string };
   GrammarExerciseScreen: { topicId: string };
+  FeedbackScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<MainStackParamList>();
@@ -54,6 +56,7 @@ const MainNavigator = () => {
       <Stack.Screen name="GrammarTopicListScreen" component={GrammarTopicListScreen} />
       <Stack.Screen name="GrammarTheoryScreen" component={GrammarTheoryScreen} />
       <Stack.Screen name="GrammarExerciseScreen" component={GrammarExerciseScreen} />
+      <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
     </Stack.Navigator>
   );
 };

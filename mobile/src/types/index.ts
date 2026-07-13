@@ -350,3 +350,28 @@ export interface GrammarSubmitResponse {
   };
 }
 
+// Beta feedback
+
+export type FeedbackModule =
+  | 'general'
+  | 'vocabulary'
+  | 'camera'
+  | 'listening'
+  | 'reading'
+  | 'grammar';
+
+export interface SubmitFeedbackPayload {
+  module: FeedbackModule;
+  rating: number;
+  message: string;
+  platform?: string;
+  appVersion?: string;
+  deviceModel?: string;
+}
+
+export interface FeedbackItem extends SubmitFeedbackPayload {
+  id: string;
+  status: 'new' | 'reviewed' | 'resolved';
+  createdAt: string;
+}
+

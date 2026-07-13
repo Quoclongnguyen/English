@@ -105,6 +105,22 @@ const HomeScreen = () => {
         ))}
       </View>
 
+      <View style={[styles.feedbackCard, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+        <View style={styles.feedbackText}>
+          <Text style={[styles.feedbackTitle, { color: colors.text }]}>Beta feedback</Text>
+          <Text style={[styles.feedbackCaption, { color: colors.textMuted }]}>
+            Thấy lỗi hoặc chỗ khó dùng? Gửi góp ý nhanh cho tụi mình.
+          </Text>
+        </View>
+        <Button
+          title="Send Feedback"
+          onPress={() => navigation.navigate('FeedbackScreen')}
+          variant="outline"
+          color="green"
+          size="sm"
+        />
+      </View>
+
       <Button title="Log Out" onPress={logout} variant="outline" color="dark" style={styles.logoutBtn} />
     </ScrollView>
   );
@@ -162,6 +178,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 12,
+  },
+  feedbackCard: {
+    borderRadius: 18,
+    borderWidth: 1,
+    gap: 14,
+    padding: 16,
+  },
+  feedbackText: {
+    gap: 4,
+  },
+  feedbackTitle: {
+    fontFamily: Typography.fontFamily.bold,
+    fontSize: 18,
+  },
+  feedbackCaption: {
+    fontFamily: Typography.fontFamily.regular,
+    fontSize: 14,
+    lineHeight: 20,
   },
   logoutBtn: {
     marginTop: 4,
